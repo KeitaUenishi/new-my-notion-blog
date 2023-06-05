@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 
 import { NEXT_PUBLIC_URL } from '../lib/notion/server-constants'
 
-export const SITE_TITLE = 'easy-notion-blog'
-export const SITE_DESCRIPTION =
-  'Easy to start your blog. You can write on your Notion.'
+export const SITE_TITLE = 'uenishi.web'
+export const SITE_DESCRIPTION = 'Uenishi Keitaのポートフォリオサイトです。'
+export const ogImage = `${NEXT_PUBLIC_URL}/images/blog-og-image.jpg`
 
 const DocumentHead = ({ title = '', description = '', urlOgImage = '' }) => {
   const { asPath } = useRouter()
@@ -28,23 +28,10 @@ const DocumentHead = ({ title = '', description = '', urlOgImage = '' }) => {
         property="og:description"
         content={description ? description : SITE_DESCRIPTION}
       />
-      {urlOgImage ? (
-        <meta property="og:image" content={urlOgImage} />
-      ) : NEXT_PUBLIC_URL ? (
-        <meta
-          property="og:image"
-          content={new URL('/default.png', NEXT_PUBLIC_URL).toString()}
-        />
-      ) : null}
+      <meta property="og:image" content={ogImage} />
       <meta name="twitter:card" content="summary_large_image" />
-      {urlOgImage ? (
-        <meta name="twitter:image" content={urlOgImage} />
-      ) : NEXT_PUBLIC_URL ? (
-        <meta
-          name="twitter:image"
-          content={new URL('/default.png', NEXT_PUBLIC_URL).toString()}
-        />
-      ) : null}
+      <meta name="twitter:image" content={ogImage} />
+
       {NEXT_PUBLIC_URL ? (
         <link
           rel="canonical"

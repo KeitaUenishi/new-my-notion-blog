@@ -1,7 +1,35 @@
 .container {
-  width: 640px;
+  width: 1080px;
   max-width: 100%;
   margin: 0 auto;
+}
+
+.blogContainer {
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 600px) {
+  .container {
+    display: block;
+  }
+}
+
+.blogContainer footer {
+  margin-top: 32px;
+}
+
+.mainContent {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+@media (max-width: 600px) {
+  .mainContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .container > div {
@@ -20,4 +48,28 @@
 .container p {
   margin: 0.3rem auto;
   line-height: 2rem;
+}
+
+/* TODO: 001 共通化したい  */
+.postPageLink {
+  color: var(--fg);
+}
+.postPageLink a {
+  background-color: var(--post-bg);
+  display: block;
+  width: 20%;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  color: inherit;
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 3rem;
+}
+.postPageLink a:hover {
+  background: var(--hover-bg);
+}
+@media (max-width: 600px) {
+  .postPageLink a {
+    width: 50%;
+  }
 }

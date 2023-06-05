@@ -36,7 +36,7 @@ export async function getStaticProps({ params: { tag, date } }) {
     console.log(`Failed to find posts for tag: ${tag}`)
     return {
       props: {
-        redirect: '/blog',
+        redirect: '/',
       },
       revalidate: 30,
     }
@@ -103,7 +103,7 @@ const RenderPostsByTagBeforeDate = ({
 
         <NoContents contents={posts} />
 
-        {posts.map(post => {
+        {posts.map((post) => {
           return (
             <div className={styles.post} key={post.Slug}>
               <PostDate post={post} />

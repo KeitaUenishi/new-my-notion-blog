@@ -4,20 +4,27 @@
   --gap: 1rem;
   --gap-double: 2rem;
 
-  --bg: #fff;
-  --fg: #333;
-  --accents-1: #0070f3;
+  --bg: #111827;
+  --fg: #e5e7eb;
+  --hd-bg: #1f2937;
+  --ft-bg: #1f2937;
+  --post-bg: #1f2937;
+  --hover-bg: #34455b;
+  --accents-1: #e5e7eb;
   --accents-2: #3291ff;
   --accents-3: #666;
   --geist-foreground: #000;
   --geist-success: #690;
 
-  --radius: 4px;
+  --radius: 12px;
 
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  --font-mono: SFMono-Regular, Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace;
+  --font-mono: SFMono-Regular, Menlo, Consolas, 'PT Mono', 'Liberation Mono',
+    Courier, monospace;
+
+  --max-width: 1080px;
 }
 
 * {
@@ -113,14 +120,14 @@ h3 {
 }
 
 ol {
-  color: #222;
+  color: #fff;
   font-weight: 400;
   font-size: 0.9rem;
   line-height: 1.8rem;
 }
 p,
 ul {
-  color: #222;
+  color: #fff;
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.8rem;
@@ -153,7 +160,7 @@ code {
 }
 
 table {
-  color: #222;
+  color: #fff;
   border-collapse: collapse;
 }
 

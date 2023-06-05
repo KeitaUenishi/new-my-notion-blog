@@ -2,6 +2,13 @@
   display: block;
   padding: 15px 0;
   text-align: center;
+  background-color: var(--hd-bg);
+  margin-bottom: 1.4rem;
+}
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: left;
 }
 .header h1 {
   padding: 0.5rem 0;
@@ -13,9 +20,8 @@
 }
 .header ul {
   list-style: none;
-  margin: inherit;
-  padding: 0.5rem 0;
   font-size: 1.1rem;
+  padding: 0;
 }
 @media (max-width: 600px) {
   .header ul {
@@ -24,7 +30,7 @@
 }
 .header ul li {
   display: inline-block;
-  padding: 0 15px;
+  padding: 0 15px 0 0;
 }
 .header ul li :global(a.active) {
   color: var(--accents-3);

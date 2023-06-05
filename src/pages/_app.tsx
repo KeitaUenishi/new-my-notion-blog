@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
 import Header from '../components/header'
 import Footer from '../components/footer'
+import { Hero } from '@/components/hero'
+
 import GoogleAnalytics from '../components/google-analytics'
 
 import '../styles/syntax-coloring.css'
@@ -27,13 +29,14 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
       <GoogleAnalytics />
+      <Header />
       <div className={styles.container}>
-        <Header />
+        <Hero />
         <div className={styles.content}>
           <Component {...pageProps} />
         </div>
-        <Footer />
       </div>
+      <Footer />
     </>
   )
 }

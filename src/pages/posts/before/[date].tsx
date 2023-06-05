@@ -1,30 +1,24 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { NUMBER_OF_POSTS_PER_PAGE } from '../../../lib/notion/server-constants'
-import DocumentHead from '../../../components/document-head'
+import { NUMBER_OF_POSTS_PER_PAGE } from '@/lib/notion/server-constants'
+import DocumentHead from '@/components/document-head'
 import {
-  BlogPostLink,
-  BlogTagLink,
   NextPageLink,
   NoContents,
-  PostDate,
-  PostExcerpt,
-  PostTags,
-  PostTitle,
   PostsNotFound,
-  ReadMoreLink,
-} from '../../../components/blog-parts'
-import styles from '../../../styles/blog.module.css'
+} from '@/components/blog-parts'
+import { BlogCard } from '@/components/blog/blogCard'
+import styles from '@/styles/blog.module.css'
 
-import { getBeforeLink } from '../../../lib/blog-helpers'
+import { getBeforeLink } from '@/lib/blog-helpers'
 import {
   getPosts,
   getRankedPosts,
   getPostsBefore,
   getFirstPost,
   getAllTags,
-} from '../../../lib/notion/client'
+} from '@/lib/notion/client'
 
 export async function getStaticProps({ params: { date } }) {
   if (!Date.parse(date) || !/\d{4}-\d{2}-\d{2}/.test(date)) {
@@ -60,14 +54,7 @@ export async function getStaticPaths() {
   }
 }
 
-const RenderPostsBeforeDate = ({
-  date,
-  posts = [],
-  firstPost,
-  rankedPosts = [],
-  tags = [],
-  redirect,
-}) => {
+const RenderPostsBeforeDate = ({ date, posts = [], firstPost, redirect }) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -83,35 +70,20 @@ const RenderPostsBeforeDate = ({
   return (
     <div className={styles.container}>
       <DocumentHead description={`Post before ${date.split('T')[0]}`} />
+      <header>
+        <h2>Posts before {date.split('T')[0]}</h2>
+      </header>
 
       <div className={styles.mainContent}>
-        <header>
-          <h2>Posts before {date.split('T')[0]}</h2>
-        </header>
-
         <NoContents contents={posts} />
 
-        {posts.map(post => {
-          return (
-            <div className={styles.post} key={post.Slug}>
-              <PostDate post={post} />
-              <PostTags post={post} />
-              <PostTitle post={post} />
-              <PostExcerpt post={post} />
-              <ReadMoreLink post={post} />
-            </div>
-          )
+        {posts.map((post) => {
+          return <BlogCard key={post.Slug} post={post} />
         })}
-
-        <footer>
-          <NextPageLink firstPost={firstPost} posts={posts} />
-        </footer>
       </div>
-
-      <div className={styles.subContent}>
-        <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        <BlogTagLink heading="Categories" tags={tags} />
-      </div>
+      <footer>
+        <NextPageLink firstPost={firstPost} posts={posts} />
+      </footer>
     </div>
   )
 }

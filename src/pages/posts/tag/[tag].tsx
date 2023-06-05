@@ -1,29 +1,23 @@
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { NUMBER_OF_POSTS_PER_PAGE } from '../../../lib/notion/server-constants'
-import DocumentHead from '../../../components/document-head'
+import { NUMBER_OF_POSTS_PER_PAGE } from '@/lib/notion/server-constants'
+import DocumentHead from '@/components/document-head'
 import {
-  BlogPostLink,
-  BlogTagLink,
   NextPageLink,
   NoContents,
-  PostDate,
-  PostExcerpt,
-  PostTags,
-  PostTitle,
   PostsNotFound,
-  ReadMoreLink,
-} from '../../../components/blog-parts'
-import styles from '../../../styles/blog.module.css'
-import { getTagLink } from '../../../lib/blog-helpers'
-import { useEffect } from 'react'
+} from '@/components/blog-parts'
+import styles from '@/styles/blog.module.css'
+import { getTagLink } from '@/lib/blog-helpers'
 import {
   getPosts,
   getRankedPosts,
   getPostsByTag,
   getFirstPostByTag,
   getAllTags,
-} from '../../../lib/notion/client'
+} from '@/lib/notion/client'
+import { BlogCard } from '@/components/blog/blogCard'
 
 export async function getStaticProps({ params: { tag } }) {
   const posts = await getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE)
@@ -32,7 +26,7 @@ export async function getStaticProps({ params: { tag } }) {
     console.log(`Failed to find posts for tag: ${tag}`)
     return {
       props: {
-        redirect: '/blog',
+        redirect: '/',
       },
       revalidate: 30,
     }
@@ -62,20 +56,12 @@ export async function getStaticPaths() {
   const tags = await getAllTags()
 
   return {
-    paths: tags.map(tag => getTagLink(tag)),
+    paths: tags.map((tag) => getTagLink(tag)),
     fallback: 'blocking',
   }
 }
 
-const RenderPostsByTags = ({
-  tag,
-  posts = [],
-  firstPost,
-  rankedPosts = [],
-  recentPosts = [],
-  tags = [],
-  redirect,
-}) => {
+const RenderPostsByTags = ({ tag, posts = [], firstPost, redirect }) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -91,35 +77,20 @@ const RenderPostsByTags = ({
   return (
     <div className={styles.container}>
       <DocumentHead description={`Posts in ${tag}`} />
+      <header>
+        <h2>{tag}</h2>
+      </header>
 
       <div className={styles.mainContent}>
-        <header>
-          <h2>{tag}</h2>
-        </header>
-
         <NoContents contents={posts} />
 
-        {posts.map(post => {
-          return (
-            <div className={styles.post} key={post.Slug}>
-              <PostDate post={post} />
-              <PostTags post={post} />
-              <PostTitle post={post} />
-              <PostExcerpt post={post} />
-              <ReadMoreLink post={post} />
-            </div>
-          )
+        {posts.map((post) => {
+          return <BlogCard key={post.Slug} post={post} />
         })}
 
         <footer>
           <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
         </footer>
-      </div>
-
-      <div className={styles.subContent}>
-        <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        <BlogPostLink heading="Latest Posts" posts={recentPosts} />
-        <BlogTagLink heading="Categories" tags={tags} />
       </div>
     </div>
   )

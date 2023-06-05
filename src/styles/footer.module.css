@@ -1,11 +1,16 @@
 .footer {
-  margin: 40px 0 10px;
+  margin: 40px 0 0;
+  padding: 48px 32px;
   text-align: center;
   font-size: 0.75rem;
+  background-color: var(--ft-bg);
 }
-.footer span {
-  color: #777;
+.footer p {
+  font-size: 16px;
 }
-.footer span a {
-  color: inherit;
+.footer div {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 1rem;
 }

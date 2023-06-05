@@ -1,0 +1,12 @@
+.postContainer {
+  padding: 16px 24px;
+  background: var(--post-bg);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.postContainer:hover {
+  background: var(--hover-bg);
+  opacity: 0.8;
+  transition: 0.3s;
+}

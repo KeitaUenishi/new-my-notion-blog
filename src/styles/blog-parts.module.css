@@ -1,26 +1,50 @@
 .postDate {
-  padding: 0 0 0.3rem;
+  padding: 0 0 0.5rem;
   font-size: 0.9rem;
 }
 
 .postTags {
+  margin-top: 0.7rem;
   font-size: 0.9rem;
 }
 .postTags a {
-  padding-right: 0.8rem;
+  padding: 0.1rem 1rem;
+  background-color: var(--accents-3);
+  margin-left: 0.5rem;
+  border-radius: var(--radius);
+}
+
+.postTagList {
+  margin: 32px auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: start;
+}
+.tagListContainer {
+  display: flex;
+}
+.postTagList a {
+  padding: 0.1rem 1rem;
+  background-color: var(--accents-3);
+  margin: 0.5rem;
+  border-radius: var(--radius);
+  font-size: 1.2rem;
 }
 
 .postTitle {
-  font-size: 1.6rem;
+  margin: 2rem 0;
+  font-size: 2.4rem;
   color: var(--fg);
 }
 @media (max-width: 600px) {
   .postTitle {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
   }
 }
 .postTitle a {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: 700;
   color: inherit;
 }
 @media (max-width: 600px) {
@@ -57,18 +81,23 @@
   }
 }
 
+/* TODO: 001 共通化したい */
 .nextPageLink {
   color: var(--fg);
 }
 .nextPageLink a {
+  background-color: var(--post-bg);
   display: block;
-  width: 30%;
+  width: 20%;
   margin: 0 auto;
-  border: 1px solid var(--accents-2);
+  border-radius: var(--radius);
   color: inherit;
   font-size: 0.85rem;
   text-align: center;
   line-height: 3rem;
+}
+.nextPageLink a:hover {
+  background: var(--hover-bg);
 }
 @media (max-width: 600px) {
   .nextPageLink a {
