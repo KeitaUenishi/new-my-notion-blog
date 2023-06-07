@@ -12,7 +12,6 @@ import styles from '@/styles/blog.module.css'
 import { getTagLink } from '@/lib/blog-helpers'
 import {
   getPosts,
-  getRankedPosts,
   getPostsByTag,
   getFirstPostByTag,
   getAllTags,
@@ -32,9 +31,8 @@ export async function getStaticProps({ params: { tag } }) {
     }
   }
 
-  const [firstPost, rankedPosts, recentPosts, tags] = await Promise.all([
+  const [firstPost, recentPosts, tags] = await Promise.all([
     getFirstPostByTag(tag),
-    getRankedPosts(),
     getPosts(5),
     getAllTags(),
   ])
@@ -43,7 +41,6 @@ export async function getStaticProps({ params: { tag } }) {
     props: {
       posts,
       firstPost,
-      rankedPosts,
       recentPosts,
       tags,
       tag,

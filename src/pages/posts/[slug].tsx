@@ -8,7 +8,6 @@ import DocumentHead from '@/components/document-head'
 import { Block } from '@/lib/notion/interfaces'
 import {
   BlogPostLink,
-  BlogTagLink,
   NoContents,
   PostBody,
   PostDate,
@@ -110,7 +109,6 @@ const RenderPost = ({
   rankedPosts = [],
   recentPosts = [],
   sameTagPosts = [],
-  tags = [],
   fallback,
 }) => {
   const { data: blocks, error } = useSWR(
@@ -125,14 +123,7 @@ const RenderPost = ({
 
   return (
     <div className={styles.container}>
-      <DocumentHead
-        title={post.Title}
-        description={post.Excerpt}
-        urlOgImage={
-          NEXT_PUBLIC_URL &&
-          new URL(`/api/og-image/${post.Slug}`, NEXT_PUBLIC_URL).toString()
-        }
-      />
+      <DocumentHead title={post.Title} description={post.Excerpt} />
 
       <div className={styles.mainContent}>
         <div className={styles.post}>
@@ -165,7 +156,6 @@ const RenderPost = ({
         />
         <BlogPostLink heading="Recommended" posts={rankedPosts} />
         <BlogPostLink heading="Latest posts" posts={recentPosts} />
-        <BlogTagLink heading="Categories" tags={tags} />
       </div>
     </div>
   )

@@ -28,7 +28,7 @@
   overflow: auto;
   margin: 5px;
   padding: 0.8rem;
-  background: rgb(247, 246, 243);
+  background: #1a2638;
   font-size: 0.9rem;
   line-height: 1.2rem;
   border-radius: var(--radius);
@@ -36,7 +36,7 @@
 .code pre code {
   color: var(--fg);
   padding: 0;
-  background: rgb(247, 246, 243) !important;
+  background: #1a2638 !important;
 }
 .gray,
 .gray:hover {
@@ -169,6 +169,7 @@
   width: 100%;
   max-width: 100%;
   font-size: 0.9rem;
+  margin-top: 12px;
 }
 .bookmark:hover {
   background: var(--hover);

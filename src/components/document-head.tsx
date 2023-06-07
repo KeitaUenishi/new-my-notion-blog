@@ -7,7 +7,7 @@ export const SITE_TITLE = 'uenishi.web'
 export const SITE_DESCRIPTION = 'Uenishi Keitaのポートフォリオサイトです。'
 export const ogImage = `${NEXT_PUBLIC_URL}/images/blog-og-image.jpg`
 
-const DocumentHead = ({ title = '', description = '', urlOgImage = '' }) => {
+const DocumentHead = ({ title = '', description = '' }) => {
   const { asPath } = useRouter()
 
   return (

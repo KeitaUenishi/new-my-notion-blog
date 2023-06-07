@@ -41,7 +41,7 @@
 }
 
 .subContent {
-  width: 35%;
+  width: 100%;
 }
 @media (max-width: 600px) {
   .subContent {

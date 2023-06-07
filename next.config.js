@@ -8,7 +8,7 @@ const {
 const warnOrError =
   process.env.NODE_ENV !== 'production' || process.env.GITHUB_ACTIONS
     ? console.warn
-    : msg => {
+    : (msg) => {
         throw new Error(msg)
       }
 
