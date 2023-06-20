@@ -14,6 +14,24 @@
   }
 }
 
+.profileContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 32px;
+}
+
+@media (max-width: 600px) {
+  .profileContainer {
+    flex-direction: column;
+  }
+}
+
+.profileImage {
+  border-radius: 9999px;
+}
+
 .blogContainer footer {
   margin-top: 32px;
 }
@@ -48,6 +66,10 @@
 .container p {
   margin: 0.3rem auto;
   line-height: 2rem;
+}
+
+.profileContainer p {
+  margin: 0;
 }
 
 /* TODO: 001 共通化したい  */

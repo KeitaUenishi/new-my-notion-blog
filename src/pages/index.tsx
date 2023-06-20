@@ -1,12 +1,12 @@
 import DocumentHead from '@/components/document-head'
 import { NoContents } from '@/components/blog-parts'
-import { getPosts } from '@/lib/notion/client'
+import { getRankedPosts } from '@/lib/notion/client'
 import styles from '@/styles/page.module.css'
 import { BlogCard } from '@/components/blog/blogCard'
 import Link from 'next/link'
 
 export async function getStaticProps() {
-  const posts = await getPosts()
+  const posts = await getRankedPosts()
 
   return {
     props: {
@@ -21,6 +21,25 @@ const RenderPage = ({ posts = [] }) => {
     <div className={styles.container}>
       <DocumentHead />
       <div className={styles.blogContainer}>
+        <div className={styles.profileContainer}>
+          <div>
+            <img
+              className={styles.profileImage}
+              src="/images/profile.jpg"
+              width={80}
+              height={80}
+              alt="profile"
+            />
+          </div>
+          <div>
+            <p>1992年9月5日生まれ。 27歳までバンドでギターを弾いていました。</p>
+            <p>職歴なしの状態から28歳でエンジニアとして就職。</p>
+            <p>
+              React,TypeScript,
+              Next.jsをメインに使用しWebアプリを開発しています。大阪在住。
+            </p>
+          </div>
+        </div>
         <div className={styles.mainContent}>
           <NoContents contents={posts} />
 
