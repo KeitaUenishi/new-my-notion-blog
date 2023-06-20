@@ -1,7 +1,7 @@
 {
-  "name": "Uenishi.Web",
+  "name": "uenishi-web",
   "license": "MIT",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
     "start": "next start",
@@ -16,6 +16,9 @@
     }
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.5",
     "@notionhq/client": "^1.0.4",
     "axios": "^0.27.2",
     "dotenv": "^16.1.4",
@@ -30,6 +33,7 @@
     "prismjs": "^1.28.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-icons": "^4.9.0",
     "react-katex": "^3.0.1",
     "react-share": "^4.4.0",
     "react-twitter-embed": "^4.0.4",
