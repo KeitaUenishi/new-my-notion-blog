@@ -1,33 +1,13 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-
-import styles from '../styles/header.module.css'
-
-interface NavItem {
-  label: string
-  path: string
-}
+import styles from '@/styles/header.module.css'
+import { NavMenu } from '@/components/layout/NavMenu'
 
 const Header = () => {
-  const { asPath } = useRouter()
-
-  const navItems: NavItem[] = [
-    { label: 'Home', path: '/' },
-    { label: 'Posts', path: '/posts' },
-  ]
-
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <ul>
-          {navItems.map(({ label, path }) => (
-            <li key={label}>
-              <Link href={path} passHref>
-                <a className={asPath === path ? 'active' : null}>{label}</a>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <NavMenu />
+        </div>
       </div>
     </header>
   )
