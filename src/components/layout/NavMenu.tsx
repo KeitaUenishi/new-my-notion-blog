@@ -8,6 +8,8 @@ import { List, ListItem, ListItemButton } from '@mui/material'
 
 import { HeaderMenu } from '@/components/commons'
 
+import styles from '@/styles/components/layout/navbar.module.css'
+
 interface NavItem {
   label: string
   path: string
@@ -36,35 +38,37 @@ export const NavMenu = () => {
 
   return (
     <div>
-      <div>
-        <HeaderMenu size={36} onClick={toggleDrawer(!state)} />
-      </div>
+      <HeaderMenu
+        size={36}
+        onClick={toggleDrawer(!state)}
+        onMouseEnter={toggleDrawer(!state)}
+      />
       <Drawer
         PaperProps={{
           sx: {
             backgroundColor: '#111827',
           },
         }}
-        anchor="left"
+        anchor="top"
         open={state}
         onClose={toggleDrawer(!state)}
       >
-        <Box
-          sx={{ width: '250px' }}
-          onClick={toggleDrawer(!state)}
-          onKeyDown={toggleDrawer(!state)}
-        >
-          <List>
-            {navItems.map(({ label, path }) => (
-              <ListItem key={label}>
-                <ListItemButton>
-                  <Link href={path} passHref>
-                    <a className={asPath === path ? 'active' : null}>{label}</a>
-                  </Link>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+        <Box className={styles.container}>
+          <Box className={styles.content} onMouseLeave={toggleDrawer(!state)}>
+            <List>
+              {navItems.map(({ label, path }) => (
+                <ListItem key={label}>
+                  <ListItemButton>
+                    <Link href={path} passHref>
+                      <a className={asPath === path ? 'active' : null}>
+                        {label}
+                      </a>
+                    </Link>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
         </Box>
       </Drawer>
     </div>
