@@ -1,0 +1,14 @@
+.title {
+  font-size: 28px;
+}
+
+.button {
+  text-transform: none;
+  border-radius: 32px;
+}
+
+.button:hover {
+  courser: pointer;
+  background-color: #f5f5f5;
+  transition: 0.6s;
+}
