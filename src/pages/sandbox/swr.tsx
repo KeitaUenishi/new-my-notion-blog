@@ -21,7 +21,6 @@ const Swr: NextPage = () => {
     <Box>
       <Box mb={8}>
         <p>現在のstateのデータ: {db}</p>
-        <p>データ取得後、3秒後にstateが更新される。</p>
       </Box>
       <Box mb={4} sx={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
         <Box>SWRで取得したデータ: </Box>
