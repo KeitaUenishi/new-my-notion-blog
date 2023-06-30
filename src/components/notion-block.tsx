@@ -92,9 +92,11 @@ const colorClass = (color: string) => {
 
 const Paragraph = ({ block }) => (
   <p className={colorClass(block.Paragraph.Color)}>
-    {block.Paragraph.RichTexts.map((richText: interfaces.RichText, i: number) => (
-      <RichText richText={richText} key={`paragraph-${block.Id}-${i}`} />
-    ))}
+    {block.Paragraph.RichTexts.map(
+      (richText: interfaces.RichText, i: number) => (
+        <RichText richText={richText} key={`paragraph-${block.Id}-${i}`} />
+      )
+    )}
   </p>
 )
 
@@ -108,7 +110,9 @@ const Heading = ({ heading, level = 1 }) => {
   const htag = React.createElement(
     tag,
     { className: colorClass(heading.Color) },
-    heading.RichTexts.map((richText: interfaces.RichText) => <RichText richText={richText} key={id} />)
+    heading.RichTexts.map((richText: interfaces.RichText) => (
+      <RichText richText={richText} key={id} />
+    ))
   )
 
   return (
@@ -118,14 +122,25 @@ const Heading = ({ heading, level = 1 }) => {
   )
 }
 
-const buildHeadingId = heading => heading.RichTexts.map((richText: interfaces.RichText) => richText.Text.Content).join().trim()
+const buildHeadingId = (heading) =>
+  heading.RichTexts.map(
+    (richText: interfaces.RichText) => richText.Text.Content
+  )
+    .join()
+    .trim()
 
 const TableOfContents = ({ block, blocks }) => {
-  const headings = blocks.filter((b: interfaces.Block) => b.Type === 'heading_1' || b.Type === 'heading_2' || b.Type === 'heading_3')
+  const headings = blocks.filter(
+    (b: interfaces.Block) =>
+      b.Type === 'heading_1' || b.Type === 'heading_2' || b.Type === 'heading_3'
+  )
   return (
     <div className={styles.tableOfContents}>
       {headings.map((headingBlock: interfaces.Block) => {
-        const heading = headingBlock.Heading1 || headingBlock.Heading2 || headingBlock.Heading3
+        const heading =
+          headingBlock.Heading1 ||
+          headingBlock.Heading2 ||
+          headingBlock.Heading3
 
         let indentClass = ''
         if (headingBlock.Type === 'heading_2') {
@@ -135,9 +150,17 @@ const TableOfContents = ({ block, blocks }) => {
         }
 
         return (
-          <a href={`#${buildHeadingId(heading)}`} className={`${colorClass(block.TableOfContents.Color)} ${styles[indentClass]}`} key={headingBlock.Id}>
+          <a
+            href={`#${buildHeadingId(heading)}`}
+            className={`${colorClass(block.TableOfContents.Color)} ${
+              styles[indentClass]
+            }`}
+            key={headingBlock.Id}
+          >
             <div key={headingBlock.Id}>
-              {heading.RichTexts.map((richText: interfaces.RichText) => richText.PlainText).join('')}
+              {heading.RichTexts.map(
+                (richText: interfaces.RichText) => richText.PlainText
+              ).join('')}
             </div>
           </a>
         )
@@ -151,9 +174,7 @@ const ImageBlock = ({ block }) => (
     <div>
       <img
         src={
-          block.Image.External
-            ? block.Image.External.Url
-            : block.Image.File.Url
+          block.Image.External ? block.Image.External.Url : block.Image.File.Url
         }
         alt="画像が読み込まれない場合はページを更新してみてください。"
       />
@@ -182,9 +203,11 @@ const Callout = ({ block }) => {
     <div className={className}>
       <div>{block.Callout.Icon.Emoji}</div>
       <div>
-        {block.Callout.RichTexts.map((richText: interfaces.RichText, i: number) => (
-          <RichText richText={richText} key={`callout-${block.Id}-${i}`} />
-        ))}
+        {block.Callout.RichTexts.map(
+          (richText: interfaces.RichText, i: number) => (
+            <RichText richText={richText} key={`callout-${block.Id}-${i}`} />
+          )
+        )}
       </div>
     </div>
   )
@@ -209,9 +232,14 @@ const Table = ({ block }) => (
                 return React.createElement(
                   tag,
                   { key: `${tableRow.Id}-${j}-${i}` },
-                  cell.RichTexts.map((richText: interfaces.RichText, k: number) => (
-                    <RichText richText={richText} key={`${tableRow.Id}-${j}-${i}-${k}`} />
-                  ))
+                  cell.RichTexts.map(
+                    (richText: interfaces.RichText, k: number) => (
+                      <RichText
+                        richText={richText}
+                        key={`${tableRow.Id}-${j}-${i}-${k}`}
+                      />
+                    )
+                  )
                 )
               })}
             </tr>
@@ -264,12 +292,14 @@ const BulletedListItems = ({ blocks }) =>
         key={`bulleted-list-item-${listItem.Id}`}
         className={colorClass(listItem.BulletedListItem.Color)}
       >
-        {listItem.BulletedListItem.RichTexts.map((richText: interfaces.RichText, i: number) => (
-          <RichText
-            richText={richText}
-            key={`bulleted-list-item-${listItem.Id}-${i}`}
-          />
-        ))}
+        {listItem.BulletedListItem.RichTexts.map(
+          (richText: interfaces.RichText, i: number) => (
+            <RichText
+              richText={richText}
+              key={`bulleted-list-item-${listItem.Id}-${i}`}
+            />
+          )
+        )}
         {listItem.HasChildren ? (
           <ul>
             <BulletedListItems blocks={listItem.BulletedListItem.Children} />
@@ -286,12 +316,14 @@ const NumberedListItems = ({ blocks, level = 1 }) =>
         key={`numbered-list-item-${listItem.Id}`}
         className={colorClass(listItem.NumberedListItem.Color)}
       >
-        {listItem.NumberedListItem.RichTexts.map((richText: interfaces.RichText, i: number) => (
-          <RichText
-            richText={richText}
-            key={`numbered-list-item-${listItem.Id}-${i}`}
-          />
-        ))}
+        {listItem.NumberedListItem.RichTexts.map(
+          (richText: interfaces.RichText, i: number) => (
+            <RichText
+              richText={richText}
+              key={`numbered-list-item-${listItem.Id}-${i}`}
+            />
+          )
+        )}
         {listItem.HasChildren ? (
           level % 3 === 0 ? (
             <ol type="1">
@@ -325,12 +357,14 @@ const ToDoItems = ({ blocks }) =>
     .map((listItem: interfaces.Block) => (
       <div key={`to-do-item-${listItem.Id}`}>
         <input type="checkbox" defaultChecked={listItem.ToDo.Checked} />
-        {listItem.ToDo.RichTexts.map((richText: interfaces.RichText, i: number) => (
-          <RichText
-            richText={richText}
-            key={`to-do-item-${listItem.Id}-${i}`}
-          />
-        ))}
+        {listItem.ToDo.RichTexts.map(
+          (richText: interfaces.RichText, i: number) => (
+            <RichText
+              richText={richText}
+              key={`to-do-item-${listItem.Id}-${i}`}
+            />
+          )
+        )}
         {listItem.HasChildren ? (
           <ul>
             <ToDoItems blocks={listItem.ToDo.Children} />
@@ -339,14 +373,18 @@ const ToDoItems = ({ blocks }) =>
       </div>
     ))
 
-const SyncedBlock = ({ block }) => <NotionBlocks blocks={block.SyncedBlock.Children} />
+const SyncedBlock = ({ block }) => (
+  <NotionBlocks blocks={block.SyncedBlock.Children} />
+)
 
 const Toggle = ({ block }) => (
   <details className={styles.toggle}>
     <summary>
-      {block.Toggle.RichTexts.map((richText: interfaces.RichText, i: number) => (
-        <RichText richText={richText} key={`summary-${block.Id}-${i}`} />
-      ))}
+      {block.Toggle.RichTexts.map(
+        (richText: interfaces.RichText, i: number) => (
+          <RichText richText={richText} key={`summary-${block.Id}-${i}`} />
+        )
+      )}
     </summary>
     <div>
       <NotionBlocks blocks={block.Toggle.Children} />
@@ -387,7 +425,11 @@ const NotionBlock = ({ block, blocks }) => {
     return <Table block={block} />
   } else if (block.Type === 'column_list') {
     return <ColumnList block={block} blocks={blocks} />
-  } else if (block.Type === 'bulleted_list' || block.Type === 'numbered_list' || block.Type === 'to_do') {
+  } else if (
+    block.Type === 'bulleted_list' ||
+    block.Type === 'numbered_list' ||
+    block.Type === 'to_do'
+  ) {
     return <List block={block} />
   } else if (block.Type === 'synced_block') {
     return <SyncedBlock block={block} />
@@ -412,7 +454,8 @@ const wrapListItems = (blocks: Array<interfaces.Block>) =>
     const isNumberedListItem = block.Type === 'numbered_list_item'
     const isToDo = block.Type === 'to_do'
 
-    if (!isBulletedListItem && !isNumberedListItem && !isToDo) return arr.concat(block)
+    if (!isBulletedListItem && !isNumberedListItem && !isToDo)
+      return arr.concat(block)
 
     let listType = ''
     if (isBulletedListItem) {

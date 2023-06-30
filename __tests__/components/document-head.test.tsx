@@ -11,11 +11,11 @@ jest.mock('next/router', () => ({
 }))
 
 const mockNextPublicURL = jest.fn()
-jest.mock('../../src/lib/notion/server-constants', () => ({
-  get NEXT_PUBLIC_URL() {
-    return mockNextPublicURL()
-  },
-}))
+// jest.mock('../../src/lib/notion/server-constants', () => ({
+//   get NEXT_PUBLIC_URL() {
+//     return mockNextPublicURL()
+//   },
+// }))
 
 describe('DocumentHead', () => {
   describe('with NEXT_PUBLIC_URL', () => {
