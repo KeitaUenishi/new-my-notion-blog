@@ -39,9 +39,10 @@ const Swr: NextPage = () => {
       </Box>
       <p>
         refreshIntervalを 10000 に設定しているため、10秒に一度データ取得を行う
-      </p>
-      <p>
+        <br />
         データ取得中（isLoadingがtrue）の間は、ローディングスピナーを表示する
+        <br />
+        （API側で、レスポンスまで3秒かかるように設定しています）
       </p>
     </Box>
   )
