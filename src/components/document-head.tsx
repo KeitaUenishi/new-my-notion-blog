@@ -31,7 +31,12 @@ const DocumentHead = ({ title = '', description = '' }) => {
       <meta property="og:image" content={ogImage} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content={ogImage} />
-
+      <meta name="twitter:title" content={title ? title : SITE_TITLE} />
+      <meta
+        name="twitter:description"
+        content={description ? description : SITE_DESCRIPTION}
+      />
+      <meta name="twitter:creator" content="@uk092908" />
       {NEXT_PUBLIC_URL ? (
         <link
           rel="canonical"
