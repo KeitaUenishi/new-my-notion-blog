@@ -22,6 +22,7 @@ export const NavMenu = () => {
   const navItems: NavItem[] = [
     { label: 'Home', path: '/' },
     { label: 'Posts', path: '/posts' },
+    { label: 'SandBox', path: '/sandbox' },
   ]
 
   const toggleDrawer =

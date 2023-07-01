@@ -1,16 +1,17 @@
-import '../styles/global.css'
+import '@/styles/global.css'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import * as gtag from '../lib/gtag'
-import Header from '../components/header'
-import Footer from '../components/footer'
+import * as gtag from '@/lib/gtag'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 import { Hero } from '@/components/hero'
+import { UiProvider } from '@/components/base/UiProvider'
 
-import GoogleAnalytics from '../components/google-analytics'
+import GoogleAnalytics from '@/components/google-analytics'
 
-import '../styles/syntax-coloring.css'
-import styles from '../styles/shared.module.css'
+import '@/styles/syntax-coloring.css'
+import styles from '@/styles/shared.module.css'
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
@@ -27,7 +28,7 @@ const App = ({ Component, pageProps }) => {
   }, [router.events, pageProps.title])
 
   return (
-    <>
+    <UiProvider>
       <GoogleAnalytics />
       <Header />
       <div className={styles.container}>
@@ -37,7 +38,7 @@ const App = ({ Component, pageProps }) => {
         </div>
       </div>
       <Footer />
-    </>
+    </UiProvider>
   )
 }
 
