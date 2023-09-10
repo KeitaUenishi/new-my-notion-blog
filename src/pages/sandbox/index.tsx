@@ -24,12 +24,16 @@ const SandBox: NextPage<Props> = ({ paths }) => {
     <div>
       <DocumentHead title="SandBox" />
       <div className={styles.container}>
-        <p className={styles.title}>pages</p>
+        <p className={styles.title}>sandbox</p>
+        <p>いろんな個人的遊びをまとめたページ</p>
         {paths.pages.map((path) => {
           return (
             <ol key={path}>
               <Link href={`/sandbox/${path}`}>
-                <Button className={styles.button} variant="outlined">
+                <Button
+                  style={{ textTransform: 'none', borderRadius: '32px' }}
+                  variant="outlined"
+                >
                   {path}
                 </Button>
               </Link>
