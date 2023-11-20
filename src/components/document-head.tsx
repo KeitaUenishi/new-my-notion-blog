@@ -29,7 +29,7 @@ const DocumentHead = ({ title = '', description = '' }) => {
         content={description ? description : SITE_DESCRIPTION}
       />
       <meta property="og:image" content={ogImage} />
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content="summary" />
       <meta name="twitter:image" content={ogImage} />
       <meta name="twitter:title" content={title ? title : SITE_TITLE} />
       <meta
