@@ -14,7 +14,7 @@ import {
   PostTitle,
   PostsNotFound,
   ReadMoreLink,
-} from "../../../../../components/blog-parts";
+} from "../../../../../components/ui/blog/blog-parts";
 import styles from "../../../../../styles/blog.module.css";
 
 import {

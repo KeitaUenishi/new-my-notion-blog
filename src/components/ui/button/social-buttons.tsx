@@ -9,8 +9,8 @@ import {
   TwitterShareButton,
 } from "react-share";
 
-import * as gtag from "../lib/gtag";
-import styles from "../styles/social-buttons.module.css";
+import * as gtag from "../../../lib/gtag";
+import styles from "@/styles/social-buttons.module.css";
 
 const SocialButtons = ({ title = "", url, id = null }) => (
   <ul className={styles.socialButtons}>

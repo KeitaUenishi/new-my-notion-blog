@@ -14,8 +14,8 @@ import {
   PostTags,
   PostTitle,
   PostsNotFound,
-} from "@/components/blog-parts";
-import SocialButtons from "@/components/social-buttons";
+} from "@/components/ui/blog/blog-parts";
+import SocialButtons from "@/components/ui/button/social-buttons";
 import styles from "@/styles/blog-page.module.css";
 import { getBlogLink } from "@/lib/blog-helpers";
 import {

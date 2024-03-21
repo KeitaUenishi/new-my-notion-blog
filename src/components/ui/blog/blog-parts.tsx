@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
 
-import { Post } from "../lib/notion/interfaces";
-import NotionBlocks from "./notion-block";
-import { getBeforeLink, getBlogLink, getDateStr, getTagLink, getTagBeforeLink } from "../lib/blog-helpers";
-import styles from "../styles/blog-parts.module.css";
+import { Post } from "../../../lib/notion/interfaces";
+import NotionBlocks from "../../notion-block";
+import { getBeforeLink, getBlogLink, getDateStr, getTagLink, getTagBeforeLink } from "../../../lib/blog-helpers";
+import styles from "@/styles/blog-parts.module.css";
 
 export const PostDate = ({ post }) => <div className={styles.postDate}>{post.Date ? getDateStr(post.Date) : ""}</div>;
 

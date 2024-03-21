@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
 import DocumentHead from "@/components/document-head";
-import { NextPageLink, NoContents, PostsNotFound } from "@/components/blog-parts";
+import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
 import styles from "@/styles/blog.module.css";
 import { getTagLink } from "@/lib/blog-helpers";
 import { getPosts, getPostsByTag, getFirstPostByTag, getAllTags } from "@/lib/notion/client";
-import { BlogCard } from "@/components/blog/blogCard";
+import { BlogCard } from "@/components/ui/blog/blogCard";
 
 export async function getStaticProps({ params: { tag } }) {
   const posts = await getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE);

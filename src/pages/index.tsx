@@ -1,8 +1,8 @@
 import DocumentHead from "@/components/document-head";
-import { NoContents } from "@/components/blog-parts";
+import { NoContents } from "@/components/ui/blog/blog-parts";
 import { getRankedPosts } from "@/lib/notion/client";
 import styles from "@/styles/page.module.css";
-import { BlogCard } from "@/components/blog/blogCard";
+import { BlogCard } from "@/components/ui/blog/blogCard";
 import Link from "next/link";
 
 export async function getStaticProps() {

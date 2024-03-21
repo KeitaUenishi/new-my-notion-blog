@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { PostDate, PostTags, PostTitle } from "@/components/blog-parts";
+import { PostDate, PostTags, PostTitle } from "@/components/ui/blog/blog-parts";
 import { getBlogLink } from "@/lib/blog-helpers";
 import styles from "./blog-card.module.css";
 

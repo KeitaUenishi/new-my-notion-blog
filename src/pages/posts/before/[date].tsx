@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
 import DocumentHead from "@/components/document-head";
-import { NextPageLink, NoContents, PostsNotFound } from "@/components/blog-parts";
-import { BlogCard } from "@/components/blog/blogCard";
+import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
+import { BlogCard } from "@/components/ui/blog/blogCard";
 import styles from "@/styles/blog.module.css";
 
 import { getBeforeLink } from "@/lib/blog-helpers";
