@@ -4,6 +4,30 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "object", "type", "index"],
+        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "pathGroups": [
+          {
+            "pattern": "@/components/common",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/components/hooks",
+            "group": "internal",
+            "position": "before"
+          }
+        ]
+      }
+    ]
   }
 }

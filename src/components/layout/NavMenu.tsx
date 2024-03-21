@@ -1,53 +1,47 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
-import Drawer from '@mui/material/Drawer'
-import Box from '@mui/material/Box'
-import { List, ListItem, ListItemButton } from '@mui/material'
+import Drawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
+import { List, ListItem, ListItemButton } from "@mui/material";
 
-import { HeaderMenu } from '@/components/commons'
+import { HeaderMenu } from "@/components/commons";
 
-import styles from '@/styles/components/layout/navbar.module.css'
+import styles from "@/styles/components/layout/navbar.module.css";
 
 interface NavItem {
-  label: string
-  path: string
+  label: string;
+  path: string;
 }
 
 export const NavMenu = () => {
-  const [state, setState] = useState(false)
-  const { asPath } = useRouter()
+  const [state, setState] = useState(false);
+  const { asPath } = useRouter();
 
   const navItems: NavItem[] = [
-    { label: 'Home', path: '/' },
-    { label: 'Posts', path: '/posts' },
-    { label: 'SandBox', path: '/sandbox' },
-  ]
+    { label: "Home", path: "/" },
+    { label: "Posts", path: "/posts" },
+    { label: "SandBox", path: "/sandbox" },
+  ];
 
-  const toggleDrawer =
-    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return
-      }
-      setState(open)
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" || (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return;
     }
+    setState(open);
+  };
 
   return (
     <div>
-      <HeaderMenu
-        size={36}
-        onClick={toggleDrawer(!state)}
-        onMouseEnter={toggleDrawer(!state)}
-      />
+      <HeaderMenu size={36} onClick={toggleDrawer(!state)} onMouseEnter={toggleDrawer(!state)} />
       <Drawer
         PaperProps={{
           sx: {
-            backgroundColor: '#111827',
+            backgroundColor: "#111827",
           },
         }}
         anchor="top"
@@ -61,9 +55,7 @@ export const NavMenu = () => {
                 <ListItem key={label}>
                   <ListItemButton>
                     <Link href={path} passHref>
-                      <a className={asPath === path ? 'active' : null}>
-                        {label}
-                      </a>
+                      <a className={asPath === path ? "active" : null}>{label}</a>
                     </Link>
                   </ListItemButton>
                 </ListItem>
@@ -73,5 +65,5 @@ export const NavMenu = () => {
         </Box>
       </Drawer>
     </div>
-  )
-}
+  );
+};

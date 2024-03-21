@@ -1,9 +1,9 @@
-import Script from 'next/script'
-import { NEXT_PUBLIC_GA_TRACKING_ID } from '../lib/notion/server-constants'
+import Script from "next/script";
+import { NEXT_PUBLIC_GA_TRACKING_ID } from "../lib/notion/server-constants";
 
 const GoogleAnalytics = () => {
   if (!NEXT_PUBLIC_GA_TRACKING_ID) {
-    return null
+    return null;
   }
 
   return (
@@ -22,7 +22,7 @@ const GoogleAnalytics = () => {
           `}
       </Script>
     </>
-  )
-}
+  );
+};
 
-export default GoogleAnalytics
+export default GoogleAnalytics;

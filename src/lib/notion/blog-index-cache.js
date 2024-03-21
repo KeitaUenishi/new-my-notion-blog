@@ -1,26 +1,22 @@
 /* eslint @typescript-eslint/no-var-requires: 0 */
 // use commonjs so it can be required without transpiling
 
-const fs = require('fs')
+const fs = require("fs");
 
-const {
-  NOTION_API_SECRET,
-  DATABASE_ID,
-  BLOG_INDEX_CACHE,
-} = require('./server-constants')
-const { Client } = require('@notionhq/client')
+const { NOTION_API_SECRET, DATABASE_ID, BLOG_INDEX_CACHE } = require("./server-constants");
+const { Client } = require("@notionhq/client");
 
 const notionClient = new Client({
   auth: NOTION_API_SECRET,
-})
+});
 
 exports.exists = function () {
-  return fs.existsSync(BLOG_INDEX_CACHE)
-}
+  return fs.existsSync(BLOG_INDEX_CACHE);
+};
 
 exports.get = function () {
-  return JSON.parse(fs.readFileSync(BLOG_INDEX_CACHE))
-}
+  return JSON.parse(fs.readFileSync(BLOG_INDEX_CACHE));
+};
 
 exports.set = async function () {
   let params = {
@@ -28,13 +24,13 @@ exports.set = async function () {
     filter: {
       and: [
         {
-          property: 'Published',
+          property: "Published",
           checkbox: {
             equals: true,
           },
         },
         {
-          property: 'Date',
+          property: "Date",
           date: {
             on_or_before: new Date().toISOString(),
           },
@@ -43,34 +39,34 @@ exports.set = async function () {
     },
     sorts: [
       {
-        property: 'Date',
-        timestamp: 'created_time',
-        direction: 'descending',
+        property: "Date",
+        timestamp: "created_time",
+        direction: "descending",
       },
     ],
     page_size: 100,
-  }
+  };
 
-  let results = []
+  let results = [];
 
   while (true) {
-    const data = await notionClient.databases.query(params)
+    const data = await notionClient.databases.query(params);
 
-    results = results.concat(data.results)
+    results = results.concat(data.results);
 
     if (!data.has_more) {
-      break
+      break;
     }
 
-    params['start_cursor'] = data.next_cursor
+    params["start_cursor"] = data.next_cursor;
   }
 
-  fs.writeFileSync(BLOG_INDEX_CACHE, JSON.stringify(results))
-  console.log(`Cached ${results.length} posts into ${BLOG_INDEX_CACHE}`)
+  fs.writeFileSync(BLOG_INDEX_CACHE, JSON.stringify(results));
+  console.log(`Cached ${results.length} posts into ${BLOG_INDEX_CACHE}`);
 
-  return
-}
+  return;
+};
 
 exports.expire = function () {
-  return fs.unlinkSync(BLOG_INDEX_CACHE)
-}
+  return fs.unlinkSync(BLOG_INDEX_CACHE);
+};

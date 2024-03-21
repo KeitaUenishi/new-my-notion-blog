@@ -1,8 +1,8 @@
 export type Actions = {
-  show: () => void
-  showWhile: (callback: () => Promise<void>) => Promise<void>
-  close: () => void
-}
+  show: () => void;
+  showWhile: (callback: () => Promise<void>) => Promise<void>;
+  close: () => void;
+};
 
 export const emptyActions = {
   show(): void {
@@ -15,4 +15,4 @@ export const emptyActions = {
   close(): void {
     // No operation function for context initialization.
   },
-}
+};

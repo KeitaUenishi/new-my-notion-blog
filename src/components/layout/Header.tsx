@@ -1,5 +1,5 @@
-import styles from '@/styles/header.module.css'
-import { NavMenu } from '@/components/layout/NavMenu'
+import styles from "@/styles/header.module.css";
+import { NavMenu } from "@/components/layout/NavMenu";
 
 const Header = () => {
   return (
@@ -10,7 +10,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

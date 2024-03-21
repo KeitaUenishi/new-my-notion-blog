@@ -1,4 +1,4 @@
-require('dotenv').config()
-const blogIndexCache = require('../src/lib/notion/blog-index-cache')
+require("dotenv").config();
+const blogIndexCache = require("../src/lib/notion/blog-index-cache");
 
-blogIndexCache.set()
+blogIndexCache.set();

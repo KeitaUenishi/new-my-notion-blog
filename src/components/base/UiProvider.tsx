@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from "react";
 
-import { LoadingScreen } from '@/components/base/LoadingScreen'
-import { emptyActions } from '@/hooks/emptyActions'
-import { UiContext } from '@/hooks/uiContext'
+import { LoadingScreen } from "@/components/base/LoadingScreen";
+import { emptyActions } from "@/hooks/emptyActions";
+import { UiContext } from "@/hooks/uiContext";
 
 const ui = {
   loadingScreen: emptyActions,
-}
+};
 
 export const UiProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
@@ -14,5 +14,5 @@ export const UiProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       {children}
       <LoadingScreen />
     </UiContext.Provider>
-  )
-}
+  );
+};

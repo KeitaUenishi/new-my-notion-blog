@@ -1,13 +1,13 @@
-import { createContext } from 'react'
+import { createContext } from "react";
 
-import { emptyActions, Actions } from './emptyActions'
+import { emptyActions, Actions } from "./emptyActions";
 
 export type Ui = {
-  loadingScreen: Actions
-}
+  loadingScreen: Actions;
+};
 
 const ui = {
   loadingScreen: emptyActions,
-}
+};
 
-export const UiContext = createContext<Ui>(ui)
+export const UiContext = createContext<Ui>(ui);

@@ -1,5 +1,5 @@
-import React from 'react'
-import Task from './Task'
+import React from "react";
+import Task from "./Task";
 
 export default function TaskList({ tasks, onChangeTask, onDeleteTask }) {
   return (
@@ -10,5 +10,5 @@ export default function TaskList({ tasks, onChangeTask, onDeleteTask }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }

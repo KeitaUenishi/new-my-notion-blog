@@ -1,23 +1,23 @@
-import React from 'react'
-import { InferGetStaticPropsType, NextPage } from 'next'
-import Link from 'next/link'
-import { Button } from '@mui/material'
-import DocumentHead from '@/components/document-head'
-import styles from '@/styles/sandbox.module.css'
-import { getFileNames } from '@/server/getFileNames'
+import React from "react";
+import { InferGetStaticPropsType, NextPage } from "next";
+import Link from "next/link";
+import { Button } from "@mui/material";
+import DocumentHead from "@/components/document-head";
+import styles from "@/styles/sandbox.module.css";
+import { getFileNames } from "@/server/getFileNames";
 
 export const getStaticProps = async () => {
-  const paths = getFileNames('./src/pages/sandbox', ['index'])
+  const paths = getFileNames("./src/pages/sandbox", ["index"]);
   return {
     props: {
       paths: {
         pages: paths,
       },
     },
-  }
-}
+  };
+};
 
-type Props = InferGetStaticPropsType<typeof getStaticProps>
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const SandBox: NextPage<Props> = ({ paths }) => {
   return (
@@ -30,19 +30,16 @@ const SandBox: NextPage<Props> = ({ paths }) => {
           return (
             <ol key={path}>
               <Link href={`/sandbox/${path}`}>
-                <Button
-                  style={{ textTransform: 'none', borderRadius: '32px' }}
-                  variant="outlined"
-                >
+                <Button style={{ textTransform: "none", borderRadius: "32px" }} variant="outlined">
                   {path}
                 </Button>
               </Link>
             </ol>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SandBox
+export default SandBox;

@@ -1,46 +1,46 @@
 export const getBlogLink = (slug: string) => {
-  return `/posts/${slug}`
-}
+  return `/posts/${slug}`;
+};
 
 export const getTagLink = (tag: string) => {
-  return `/posts/tag/${encodeURIComponent(tag)}`
-}
+  return `/posts/tag/${encodeURIComponent(tag)}`;
+};
 
 export const getBeforeLink = (date: string) => {
-  return `/posts/before/${date}`
-}
+  return `/posts/before/${date}`;
+};
 
 export const getTagBeforeLink = (tag: string, date: string) => {
-  return `/posts/tag/${encodeURIComponent(tag)}/before/${date}`
-}
+  return `/posts/tag/${encodeURIComponent(tag)}/before/${date}`;
+};
 
 export const getDateStr = (date: string) => {
-  const dt = new Date(date)
-  const y = dt.getFullYear()
-  const m = ('00' + (dt.getMonth() + 1)).slice(-2)
-  const d = ('00' + dt.getDate()).slice(-2)
-  return y + '-' + m + '-' + d
-}
+  const dt = new Date(date);
+  const y = dt.getFullYear();
+  const m = ("00" + (dt.getMonth() + 1)).slice(-2);
+  const d = ("00" + dt.getDate()).slice(-2);
+  return y + "-" + m + "-" + d;
+};
 
 export const normalizeSlug = (slug: string) => {
-  const startingSlash = slug.startsWith('/')
-  const endingSlash = slug.endsWith('/')
+  const startingSlash = slug.startsWith("/");
+  const endingSlash = slug.endsWith("/");
 
   if (startingSlash) {
-    slug = slug.substring(1)
+    slug = slug.substring(1);
   }
   if (endingSlash) {
-    slug = slug.substring(0, slug.length - 1)
+    slug = slug.substring(0, slug.length - 1);
   }
-  return startingSlash || endingSlash ? normalizeSlug(slug) : slug
-}
+  return startingSlash || endingSlash ? normalizeSlug(slug) : slug;
+};
 
 export const isYouTubeURL = (url: URL): boolean => {
-  if (['www.youtube.com', 'youtu.be'].includes(url.hostname)) {
-    return true
+  if (["www.youtube.com", "youtu.be"].includes(url.hostname)) {
+    return true;
   }
-  return false
-}
+  return false;
+};
 
 // Supported URL
 //
@@ -51,21 +51,21 @@ export const isYouTubeURL = (url: URL): boolean => {
 // - http://www.youtube.com/v/0zM3nApSvMg?fs=1&amp;hl=en_US&amp;rel=0
 // - http://www.youtube.com/embed/0zM3nApSvMg?rel=0
 export const parseYouTubeVideoId = (url: URL): string => {
-  if (!isYouTubeURL(url)) return ''
+  if (!isYouTubeURL(url)) return "";
 
-  if (url.hostname === 'youtu.be') {
-    return url.pathname.split('/')[1]
-  } else if (url.pathname === '/watch') {
-    return url.searchParams.get('v')
+  if (url.hostname === "youtu.be") {
+    return url.pathname.split("/")[1];
+  } else if (url.pathname === "/watch") {
+    return url.searchParams.get("v");
   } else {
-    const elements = url.pathname.split('/')
+    const elements = url.pathname.split("/");
 
-    if (elements.length < 2) return ''
+    if (elements.length < 2) return "";
 
-    if (elements[1] === 'v' || elements[1] === 'embed') {
-      return elements[2]
+    if (elements[1] === "v" || elements[1] === "embed") {
+      return elements[2];
     }
   }
 
-  return ''
-}
+  return "";
+};

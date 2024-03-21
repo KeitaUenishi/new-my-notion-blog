@@ -1,35 +1,35 @@
-import { NextPage } from 'next'
-import React, { useEffect, useState } from 'react'
-import useSWR from 'swr'
-import { Box, CircularProgress } from '@mui/material'
+import { NextPage } from "next";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
+import { Box, CircularProgress } from "@mui/material";
 
-import { fetcher } from '@/common/fetcher'
+import { fetcher } from "@/common/fetcher";
 
 const Swr: NextPage = () => {
-  const [db, setDb] = useState('asdfg')
-  const { data, isLoading, isValidating } = useSWR('/api/swrTest', fetcher, {
-    fallbackData: 'initial',
+  const [db, setDb] = useState("asdfg");
+  const { data, isLoading, isValidating } = useSWR("/api/swrTest", fetcher, {
+    fallbackData: "initial",
     refreshInterval: 10000,
-  })
+  });
   useEffect(() => {
-    setDb(data.key)
-  }, [data])
+    setDb(data.key);
+  }, [data]);
 
-  const key = data?.key
+  const key = data?.key;
 
   return (
     <Box>
       <Box mb={8}>
         <p>現在のstateのデータ: {db}</p>
       </Box>
-      <Box mb={4} sx={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <Box mb={4} sx={{ display: "flex", gap: "16px", alignItems: "center" }}>
         <Box>SWRで取得したデータ: </Box>
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '16px',
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "16px",
           }}
         >
           {isLoading ? <div></div> : <div>{key}</div>}
@@ -44,7 +44,7 @@ const Swr: NextPage = () => {
         （API側で、レスポンスまで3秒かかるように設定しています）
       </p>
     </Box>
-  )
-}
+  );
+};
 
-export default Swr
+export default Swr;

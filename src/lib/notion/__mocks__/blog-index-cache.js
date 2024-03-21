@@ -1,3 +1,3 @@
-'use strict'
+"use strict";
 
-exports.exists = () => false
+exports.exists = () => false;

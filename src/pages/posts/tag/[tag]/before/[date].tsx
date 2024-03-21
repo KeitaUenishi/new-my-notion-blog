@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 
-import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../lib/notion/server-constants'
-import DocumentHead from '../../../../../components/document-head'
+import { NUMBER_OF_POSTS_PER_PAGE } from "../../../../../lib/notion/server-constants";
+import DocumentHead from "../../../../../components/document-head";
 import {
   BlogPostLink,
   BlogTagLink,
@@ -14,8 +14,8 @@ import {
   PostTitle,
   PostsNotFound,
   ReadMoreLink,
-} from '../../../../../components/blog-parts'
-import styles from '../../../../../styles/blog.module.css'
+} from "../../../../../components/blog-parts";
+import styles from "../../../../../styles/blog.module.css";
 
 import {
   getPosts,
@@ -23,23 +23,23 @@ import {
   getPostsByTagBefore,
   getFirstPostByTag,
   getAllTags,
-} from '../../../../../lib/notion/client'
+} from "../../../../../lib/notion/client";
 
 export async function getStaticProps({ params: { tag, date } }) {
   if (!Date.parse(date) || !/\d{4}-\d{2}-\d{2}/.test(date)) {
-    return { notFound: true }
+    return { notFound: true };
   }
 
-  const posts = await getPostsByTagBefore(tag, date, NUMBER_OF_POSTS_PER_PAGE)
+  const posts = await getPostsByTagBefore(tag, date, NUMBER_OF_POSTS_PER_PAGE);
 
   if (posts.length === 0) {
-    console.log(`Failed to find posts for tag: ${tag}`)
+    console.log(`Failed to find posts for tag: ${tag}`);
     return {
       props: {
-        redirect: '/',
+        redirect: "/",
       },
       revalidate: 30,
-    }
+    };
   }
 
   const [firstPost, rankedPosts, recentPosts, tags] = await Promise.all([
@@ -47,7 +47,7 @@ export async function getStaticProps({ params: { tag, date } }) {
     getRankedPosts(),
     getPosts(5),
     getAllTags(),
-  ])
+  ]);
 
   return {
     props: {
@@ -60,14 +60,14 @@ export async function getStaticProps({ params: { tag, date } }) {
       tag,
     },
     revalidate: 3600,
-  }
+  };
 }
 
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: 'blocking',
-  }
+    fallback: "blocking",
+  };
 }
 
 const RenderPostsByTagBeforeDate = ({
@@ -80,16 +80,16 @@ const RenderPostsByTagBeforeDate = ({
   tag,
   redirect,
 }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (redirect && posts.length === 0) {
-      router.replace(redirect)
+      router.replace(redirect);
     }
-  }, [router, redirect, posts])
+  }, [router, redirect, posts]);
 
   if (!posts) {
-    return <PostsNotFound />
+    return <PostsNotFound />;
   }
 
   return (
@@ -112,7 +112,7 @@ const RenderPostsByTagBeforeDate = ({
               <PostExcerpt post={post} />
               <ReadMoreLink post={post} />
             </div>
-          )
+          );
         })}
 
         <footer>
@@ -126,7 +126,7 @@ const RenderPostsByTagBeforeDate = ({
         <BlogTagLink heading="Categories" tags={tags} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RenderPostsByTagBeforeDate
+export default RenderPostsByTagBeforeDate;

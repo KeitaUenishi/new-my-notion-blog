@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
-import { Button } from '@mui/material'
+import React, { useState } from "react";
+import { Button } from "@mui/material";
 
-import { useUi } from '@/hooks/useUi'
-import Prism from 'prismjs'
-import styles from '@/styles/notion-block.module.css'
+import { useUi } from "@/hooks/useUi";
+import Prism from "prismjs";
+import styles from "@/styles/notion-block.module.css";
 
 const ReactContext = () => {
-  const ui = useUi()
-  const [users, setUsers] = useState([])
+  const ui = useUi();
+  const [users, setUsers] = useState([]);
   const onClick = () => {
     ui.loadingScreen.showWhile(async () => {
-      const res = await fetch('/api/dummy')
-      const json = await res.json()
-      setUsers(json)
-    })
-  }
+      const res = await fetch("/api/dummy");
+      const json = await res.json();
+      setUsers(json);
+    });
+  };
 
   return (
     <div>
@@ -22,12 +22,7 @@ const ReactContext = () => {
       <Button variant="contained" onClick={onClick}>
         フェッチする
       </Button>
-      <Button
-        style={{ marginLeft: '16px' }}
-        variant="contained"
-        color="error"
-        onClick={() => setUsers([])}
-      >
+      <Button style={{ marginLeft: "16px" }} variant="contained" color="error" onClick={() => setUsers([])}>
         クリア
       </Button>
       {users.map((u) => {
@@ -35,18 +30,14 @@ const ReactContext = () => {
           <div key={u.id}>
             <p>{u.name}</p>
           </div>
-        )
+        );
       })}
-      <p style={{ marginTop: '96px' }}>LoadingScreen コンポーネントを定義</p>
+      <p style={{ marginTop: "96px" }}>LoadingScreen コンポーネントを定義</p>
       <div className={styles.code}>
         <pre>
           <code
             dangerouslySetInnerHTML={{
-              __html: Prism.highlight(
-                loadingScreenSource,
-                Prism.languages.javascript,
-                'javascript'
-              ),
+              __html: Prism.highlight(loadingScreenSource, Prism.languages.javascript, "javascript"),
             }}
           />
         </pre>
@@ -56,11 +47,7 @@ const ReactContext = () => {
         <pre>
           <code
             dangerouslySetInnerHTML={{
-              __html: Prism.highlight(
-                emptyActionsSource,
-                Prism.languages.javascript,
-                'javascript'
-              ),
+              __html: Prism.highlight(emptyActionsSource, Prism.languages.javascript, "javascript"),
             }}
           />
         </pre>
@@ -70,11 +57,7 @@ const ReactContext = () => {
         <pre>
           <code
             dangerouslySetInnerHTML={{
-              __html: Prism.highlight(
-                uiContextSource,
-                Prism.languages.javascript,
-                'javascript'
-              ),
+              __html: Prism.highlight(uiContextSource, Prism.languages.javascript, "javascript"),
             }}
           />
         </pre>
@@ -83,11 +66,7 @@ const ReactContext = () => {
           <pre>
             <code
               dangerouslySetInnerHTML={{
-                __html: Prism.highlight(
-                  useUiSource,
-                  Prism.languages.javascript,
-                  'javascript'
-                ),
+                __html: Prism.highlight(useUiSource, Prism.languages.javascript, "javascript"),
               }}
             />
           </pre>
@@ -97,11 +76,7 @@ const ReactContext = () => {
           <pre>
             <code
               dangerouslySetInnerHTML={{
-                __html: Prism.highlight(
-                  uiProviderSource,
-                  Prism.languages.javascript,
-                  'javascript'
-                ),
+                __html: Prism.highlight(uiProviderSource, Prism.languages.javascript, "javascript"),
               }}
             />
           </pre>
@@ -109,10 +84,10 @@ const ReactContext = () => {
         <p>uiProviderを_app.tsxに置いて、完成！</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ReactContext
+export default ReactContext;
 
 const loadingScreenSource = `
 import React, { useState } from 'react'
@@ -182,7 +157,7 @@ export const LoadingScreen: React.FC = () => {
     </div>
   )
 }
-`
+`;
 
 const emptyActionsSource = `
 export type Actions = {
@@ -203,7 +178,7 @@ export const emptyActions = {
     // No operation function for context initialization.
   },
 }
-`
+`;
 
 const useUiSource = `
 import { useContext } from 'react'
@@ -213,7 +188,7 @@ import { Ui, UiContext } from '@/hooks/uiContext'
 export const useUi = (): Ui => {
   return useContext(UiContext)
 }
-`
+`;
 
 const uiContextSource = `
 import { createContext } from 'react'
@@ -229,7 +204,7 @@ const ui = {
 }
 
 export const UiContext = createContext<Ui>(ui)
-`
+`;
 
 const uiProviderSource = `
 import React, { ReactNode } from 'react'
@@ -251,4 +226,4 @@ export const UiProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   )
 }
 
-`
+`;

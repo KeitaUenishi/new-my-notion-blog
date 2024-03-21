@@ -1,83 +1,79 @@
-import React from 'react'
+import React from "react";
 
-import { Box } from '@mui/material'
-import TaskList from '@/components/sandBox/reducer/TaskList'
-import AddTask from '@/components/sandBox/reducer/AddTask'
+import { Box } from "@mui/material";
+import TaskList from "@/components/sandBox/reducer/TaskList";
+import AddTask from "@/components/sandBox/reducer/AddTask";
 
 const initialTasks = [
-  { id: 0, text: 'Philosopher’s Path', done: true },
-  { id: 1, text: 'Visit the temple', done: false },
-  { id: 2, text: 'Drink matcha', done: false },
-]
+  { id: 0, text: "Philosopher’s Path", done: true },
+  { id: 1, text: "Visit the temple", done: false },
+  { id: 2, text: "Drink matcha", done: false },
+];
 
-let nextId = 3
+let nextId = 3;
 
 const Reducer = () => {
-  const [tasks, dispatch] = React.useReducer(tasksReducer, initialTasks)
+  const [tasks, dispatch] = React.useReducer(tasksReducer, initialTasks);
 
   function handleAddTask(text: string) {
     dispatch({
-      type: 'added',
+      type: "added",
       id: nextId++,
       text: text,
-    })
+    });
   }
   function handleChangeTask(task: Task) {
     dispatch({
-      type: 'changed',
+      type: "changed",
       task: task,
-    })
+    });
   }
 
   function handleDeleteTask(taskId) {
     dispatch({
-      type: 'removed',
+      type: "removed",
       id: taskId,
-    })
+    });
   }
 
   return (
     <Box>
       <h1>Task</h1>
       <AddTask onAddTask={handleAddTask} />
-      <TaskList
-        tasks={tasks}
-        onChangeTask={handleChangeTask}
-        onDeleteTask={handleDeleteTask}
-      />
+      <TaskList tasks={tasks} onChangeTask={handleChangeTask} onDeleteTask={handleDeleteTask} />
     </Box>
-  )
-}
+  );
+};
 
-export default Reducer
+export default Reducer;
 
 type Task = {
-  id: number
-  text: string
-  done: boolean
-}
+  id: number;
+  text: string;
+  done: boolean;
+};
 
-type Tasks = Task[]
+type Tasks = Task[];
 
 type Action =
   | {
-      type: 'added'
-      id: number
-      text?: string
+      type: "added";
+      id: number;
+      text?: string;
     }
   | {
-      type: 'changed'
-      id?: number
-      task?: Task
+      type: "changed";
+      id?: number;
+      task?: Task;
     }
   | {
-      type: 'removed'
-      id: number
-    }
+      type: "removed";
+      id: number;
+    };
 
 const tasksReducer = (tasks: Tasks, action: Action): Tasks => {
   switch (action.type) {
-    case 'added': {
+    case "added": {
       return [
         ...tasks,
         {
@@ -85,19 +81,19 @@ const tasksReducer = (tasks: Tasks, action: Action): Tasks => {
           text: action.text,
           done: false,
         },
-      ]
+      ];
     }
-    case 'changed': {
+    case "changed": {
       return tasks.map((t) => {
         if (t.id === action.task.id) {
-          return action.task
+          return action.task;
         } else {
-          return t
+          return t;
         }
-      })
+      });
     }
-    case 'removed': {
-      return tasks.filter((t) => t.id !== action.id)
+    case "removed": {
+      return tasks.filter((t) => t.id !== action.id);
     }
   }
-}
+};

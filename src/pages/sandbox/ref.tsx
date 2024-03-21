@@ -1,34 +1,34 @@
-import { useRef } from 'react'
-import Prism from 'prismjs'
-import styles from '@/styles/notion-block.module.css'
+import { useRef } from "react";
+import Prism from "prismjs";
+import styles from "@/styles/notion-block.module.css";
 
 export default function CatFriends() {
-  const itemsRef = useRef(null)
-  const sourceRef = useRef(null)
+  const itemsRef = useRef(null);
+  const sourceRef = useRef(null);
 
   function scrollToId(itemId: number) {
-    const map = getMap()
-    const node = map.get(itemId)
+    const map = getMap();
+    const node = map.get(itemId);
     node.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center',
-    })
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
   }
 
   function scrollToSource() {
     sourceRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center',
-    })
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
   }
 
   function getMap() {
     if (!itemsRef.current) {
-      itemsRef.current = new Map()
+      itemsRef.current = new Map();
     }
-    return itemsRef.current
+    return itemsRef.current;
   }
 
   return (
@@ -42,50 +42,46 @@ export default function CatFriends() {
         </div>
       </nav>
       <div>
-        <ul style={{ gap: '8px' }}>
+        <ul style={{ gap: "8px" }}>
           {catList.map((cat) => (
             <li
-              style={{ listStyle: 'none' }}
+              style={{ listStyle: "none" }}
               key={cat.id}
               ref={(node) => {
-                const map = getMap()
+                const map = getMap();
                 if (node) {
-                  map.set(cat.id, node)
+                  map.set(cat.id, node);
                 } else {
-                  map.delete(cat.id)
+                  map.delete(cat.id);
                 }
               }}
             >
               <div>{`id: ${cat.id}`}</div>
-              <img src={cat.imageUrl} alt={'Cat #' + cat.id} />
+              <img src={cat.imageUrl} alt={"Cat #" + cat.id} />
             </li>
           ))}
         </ul>
       </div>
-      <p style={{ marginTop: '96px' }}>ソースコード</p>
+      <p style={{ marginTop: "96px" }}>ソースコード</p>
       <div className={styles.code} ref={sourceRef}>
         <pre>
           <code
             dangerouslySetInnerHTML={{
-              __html: Prism.highlight(
-                refSource,
-                Prism.languages.javascript,
-                'javascript'
-              ),
+              __html: Prism.highlight(refSource, Prism.languages.javascript, "javascript"),
             }}
           />
         </pre>
       </div>
     </>
-  )
+  );
 }
 
-const catList = []
+const catList = [];
 for (let i = 0; i < 20; i++) {
   catList.push({
     id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i,
-  })
+    imageUrl: "https://placekitten.com/250/200?image=" + i,
+  });
 }
 
 const refSource = `
@@ -154,4 +150,4 @@ for (let i = 0; i < 20; i++) {
     imageUrl: 'https://placekitten.com/250/200?image=' + i,
   })
 }
-`
+`;

@@ -1,7 +1,7 @@
-import { useContext } from 'react'
+import { useContext } from "react";
 
-import { Ui, UiContext } from '@/hooks/uiContext'
+import { Ui, UiContext } from "@/hooks/uiContext";
 
 export const useUi = (): Ui => {
-  return useContext(UiContext)
-}
+  return useContext(UiContext);
+};

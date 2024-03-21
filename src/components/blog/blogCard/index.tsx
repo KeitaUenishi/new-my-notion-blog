@@ -1,8 +1,8 @@
-import React from 'react'
-import Link from 'next/link'
-import { PostDate, PostTags, PostTitle } from '@/components/blog-parts'
-import { getBlogLink } from '@/lib/blog-helpers'
-import styles from './blog-card.module.css'
+import React from "react";
+import Link from "next/link";
+import { PostDate, PostTags, PostTitle } from "@/components/blog-parts";
+import { getBlogLink } from "@/lib/blog-helpers";
+import styles from "./blog-card.module.css";
 
 export const BlogCard = ({ post }) => {
   return (
@@ -15,5 +15,5 @@ export const BlogCard = ({ post }) => {
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};

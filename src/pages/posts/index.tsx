@@ -1,15 +1,10 @@
-import { useState } from 'react'
-import DocumentHead from '@/components/document-head'
-import { BlogTagLink, NextPageLink, NoContents } from '@/components/blog-parts'
-import { BlogCard } from '@/components/blog/blogCard'
-import {
-  getPosts,
-  getFirstPost,
-  getRankedPosts,
-  getAllTags,
-} from '@/lib/notion/client'
-import blogStyles from '@/styles/blog.module.css'
-import styles from '@/styles/page.module.css'
+import { useState } from "react";
+import DocumentHead from "@/components/document-head";
+import { BlogTagLink, NextPageLink, NoContents } from "@/components/blog-parts";
+import { BlogCard } from "@/components/blog/blogCard";
+import { getPosts, getFirstPost, getRankedPosts, getAllTags } from "@/lib/notion/client";
+import blogStyles from "@/styles/blog.module.css";
+import styles from "@/styles/page.module.css";
 
 export async function getStaticProps() {
   const [posts, firstPost, rankedPosts, tags] = await Promise.all([
@@ -17,7 +12,7 @@ export async function getStaticProps() {
     getFirstPost(),
     getRankedPosts(),
     getAllTags(),
-  ])
+  ]);
 
   return {
     props: {
@@ -27,16 +22,16 @@ export async function getStaticProps() {
       tags,
     },
     revalidate: 60,
-  }
+  };
 }
 
 const displayType = {
-  blog: 'blog',
-  tags: 'tag',
-}
+  blog: "blog",
+  tags: "tag",
+};
 
 const RenderPosts = ({ posts = [], firstPost, tags = [] }) => {
-  const [display, setDisplay] = useState<string>(displayType.blog)
+  const [display, setDisplay] = useState<string>(displayType.blog);
   return (
     <div className={styles.container}>
       <div className={blogStyles.container}>
@@ -54,15 +49,13 @@ const RenderPosts = ({ posts = [], firstPost, tags = [] }) => {
             <div className={blogStyles.mainContent}>
               <NoContents contents={posts} />
               {posts.map((post) => {
-                return <BlogCard key={post.Slug} post={post} />
+                return <BlogCard key={post.Slug} post={post} />;
               })}
             </div>
             <div className={blogStyles.subContent}></div>
           </>
         )}
-        {display === displayType.tags && (
-          <BlogTagLink heading="Categories" tags={tags} />
-        )}
+        {display === displayType.tags && <BlogTagLink heading="Categories" tags={tags} />}
       </div>
       {display === displayType.blog && (
         <footer>
@@ -70,7 +63,7 @@ const RenderPosts = ({ posts = [], firstPost, tags = [] }) => {
         </footer>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default RenderPosts
+export default RenderPosts;

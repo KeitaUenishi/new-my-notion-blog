@@ -7,12 +7,12 @@ import {
   PocketShareButton,
   TwitterIcon,
   TwitterShareButton,
-} from 'react-share'
+} from "react-share";
 
-import * as gtag from '../lib/gtag'
-import styles from '../styles/social-buttons.module.css'
+import * as gtag from "../lib/gtag";
+import styles from "../styles/social-buttons.module.css";
 
-const SocialButtons = ({ title = '', url, id = null }) => (
+const SocialButtons = ({ title = "", url, id = null }) => (
   <ul className={styles.socialButtons}>
     <li>
       <TwitterShareButton
@@ -20,8 +20,8 @@ const SocialButtons = ({ title = '', url, id = null }) => (
         title={title}
         beforeOnClick={() =>
           gtag.share({
-            method: 'twitter',
-            contentType: 'article',
+            method: "twitter",
+            contentType: "article",
             itemId: id,
           })
         }
@@ -34,8 +34,8 @@ const SocialButtons = ({ title = '', url, id = null }) => (
         url={url}
         beforeOnClick={() =>
           gtag.share({
-            method: 'facebook',
-            contentType: 'article',
+            method: "facebook",
+            contentType: "article",
             itemId: id,
           })
         }
@@ -49,8 +49,8 @@ const SocialButtons = ({ title = '', url, id = null }) => (
         title={title}
         beforeOnClick={() =>
           gtag.share({
-            method: 'pocket',
-            contentType: 'article',
+            method: "pocket",
+            contentType: "article",
             itemId: id,
           })
         }
@@ -64,8 +64,8 @@ const SocialButtons = ({ title = '', url, id = null }) => (
         title={title}
         beforeOnClick={() =>
           gtag.share({
-            method: 'hatena',
-            contentType: 'article',
+            method: "hatena",
+            contentType: "article",
             itemId: id,
           })
         }
@@ -74,6 +74,6 @@ const SocialButtons = ({ title = '', url, id = null }) => (
       </HatenaShareButton>
     </li>
   </ul>
-)
+);
 
-export default SocialButtons
+export default SocialButtons;
