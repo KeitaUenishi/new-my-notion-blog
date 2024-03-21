@@ -1,5 +1,6 @@
-import { useRef } from "react";
 import Prism from "prismjs";
+import { useRef } from "react";
+
 import styles from "@/styles/notion-block.module.css";
 
 export default function CatFriends() {

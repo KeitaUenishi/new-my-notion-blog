@@ -1,9 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import got from "got";
 import createMetascraper from "metascraper";
 import metascraperDescription from "metascraper-description";
 import metascraperImage from "metascraper-image";
 import metascraperTitle from "metascraper-title";
+import { NextApiRequest, NextApiResponse } from "next";
 
 const metascraper = createMetascraper([metascraperDescription(), metascraperImage(), metascraperTitle()]);
 

@@ -1,6 +1,5 @@
-import React from "react";
 import dynamic from "next/dynamic";
-import * as interfaces from "../lib/notion/interfaces";
+import React from "react";
 
 const Code = dynamic(() => import("./notion-blocks/code"));
 const Embed = dynamic(() => import("./notion-blocks/embed"));
@@ -9,6 +8,7 @@ const Video = dynamic(() => import("./notion-blocks/video"));
 const InlineEquation = dynamic(() => import("./notion-blocks/inline-equation"));
 const BlockEquation = dynamic(() => import("./notion-blocks/block-equation"));
 
+import * as interfaces from "../lib/notion/interfaces";
 import styles from "../styles/notion-block.module.css";
 
 const RichText = ({ richText }) => {

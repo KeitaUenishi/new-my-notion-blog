@@ -1,13 +1,13 @@
-import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
 import DocumentHead from "@/components/document-head";
 import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
-import styles from "@/styles/blog.module.css";
+import { BlogCard } from "@/components/ui/blog/blogCard";
 import { getTagLink } from "@/lib/blog-helpers";
 import { getPosts, getPostsByTag, getFirstPostByTag, getAllTags } from "@/lib/notion/client";
-import { BlogCard } from "@/components/ui/blog/blogCard";
+import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
+import styles from "@/styles/blog.module.css";
 
 export async function getStaticProps({ params: { tag } }) {
   const posts = await getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE);

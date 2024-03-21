@@ -1,8 +1,8 @@
+import { Box } from "@mui/material";
 import React from "react";
 
-import { Box } from "@mui/material";
-import TaskList from "@/components/sandBox/reducer/TaskList";
 import AddTask from "@/components/sandBox/reducer/AddTask";
+import TaskList from "@/components/sandBox/reducer/TaskList";
 
 const initialTasks = [
   { id: 0, text: "Philosopher’s Path", done: true },

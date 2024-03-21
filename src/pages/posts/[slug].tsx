@@ -1,11 +1,8 @@
+import axios from "axios";
 import React from "react";
 import useSWR from "swr";
-import axios from "axios";
 
-import { NEXT_PUBLIC_URL } from "@/lib/notion/server-constants";
-import { Post } from "@/lib/notion/interfaces";
 import DocumentHead from "@/components/document-head";
-import { Block } from "@/lib/notion/interfaces";
 import {
   BlogPostLink,
   NoContents,
@@ -16,7 +13,6 @@ import {
   PostsNotFound,
 } from "@/components/ui/blog/blog-parts";
 import SocialButtons from "@/components/ui/button/social-buttons";
-import styles from "@/styles/blog-page.module.css";
 import { getBlogLink } from "@/lib/blog-helpers";
 import {
   getPosts,
@@ -27,6 +23,10 @@ import {
   getAllTags,
   getAllBlocksByBlockId,
 } from "@/lib/notion/client";
+import { Block } from "@/lib/notion/interfaces";
+import { Post } from "@/lib/notion/interfaces";
+import { NEXT_PUBLIC_URL } from "@/lib/notion/server-constants";
+import styles from "@/styles/blog-page.module.css";
 
 export async function getStaticProps({ params: { slug } }) {
   const post = await getPostBySlug(slug);

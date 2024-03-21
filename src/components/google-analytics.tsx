@@ -1,4 +1,5 @@
 import Script from "next/script";
+
 import { NEXT_PUBLIC_GA_TRACKING_ID } from "../lib/notion/server-constants";
 
 const GoogleAnalytics = () => {

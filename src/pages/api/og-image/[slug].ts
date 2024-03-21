@@ -1,5 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import got from "got";
+import { NextApiRequest, NextApiResponse } from "next";
+
 import { getPostBySlug } from "../../../lib/notion/client";
 
 const ApiOgImage = async function (req: NextApiRequest, res: NextApiResponse) {

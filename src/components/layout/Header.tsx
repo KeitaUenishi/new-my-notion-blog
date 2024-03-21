@@ -1,5 +1,5 @@
-import styles from "@/styles/header.module.css";
 import { NavMenu } from "@/components/layout/NavMenu";
+import styles from "@/styles/header.module.css";
 
 const Header = () => {
   return (

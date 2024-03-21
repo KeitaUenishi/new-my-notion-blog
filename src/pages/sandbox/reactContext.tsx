@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import { Button } from "@mui/material";
+import Prism from "prismjs";
+import React, { useState } from "react";
 
 import { useUi } from "@/hooks/useUi";
-import Prism from "prismjs";
 import styles from "@/styles/notion-block.module.css";
 
 const ReactContext = () => {

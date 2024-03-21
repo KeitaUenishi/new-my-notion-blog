@@ -1,8 +1,11 @@
-import React from "react";
 import Link from "next/link";
+import React from "react";
+
+import styles from "./blog-card.module.css";
+
 import { PostDate, PostTags, PostTitle } from "@/components/ui/blog/blog-parts";
 import { getBlogLink } from "@/lib/blog-helpers";
-import styles from "./blog-card.module.css";
+
 
 export const BlogCard = ({ post }) => {
   return (

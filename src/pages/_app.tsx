@@ -1,15 +1,13 @@
 import "@/styles/global.css";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-import * as gtag from "@/lib/gtag";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import { Hero } from "@/components/layout/Hero";
 import { UiProvider } from "@/components/base/UiProvider";
-
 import GoogleAnalytics from "@/components/google-analytics";
-
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import { Hero } from "@/components/layout/Hero";
+import * as gtag from "@/lib/gtag";
 import "@/styles/syntax-coloring.css";
 import styles from "@/styles/shared.module.css";
 

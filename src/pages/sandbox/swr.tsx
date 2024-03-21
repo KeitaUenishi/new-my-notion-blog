@@ -1,7 +1,7 @@
+import { Box, CircularProgress } from "@mui/material";
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import { Box, CircularProgress } from "@mui/material";
 
 import { fetcher } from "@/common/fetcher";
 

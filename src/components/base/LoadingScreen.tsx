@@ -1,7 +1,7 @@
+import { Box, CircularProgress } from "@mui/material";
 import React, { useState } from "react";
 
 import { useUi } from "@/hooks/useUi";
-import { Box, CircularProgress } from "@mui/material";
 
 export const LoadingScreen: React.FC = () => {
   const ui = useUi();
@@ -15,6 +15,7 @@ export const LoadingScreen: React.FC = () => {
       setVisible(true);
       await callback();
     } catch (error) {
+      console.error(error);
       throw error;
     } finally {
       processingTasks.delete(callback);

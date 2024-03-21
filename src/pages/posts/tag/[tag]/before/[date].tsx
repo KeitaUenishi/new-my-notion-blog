@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
-import { NUMBER_OF_POSTS_PER_PAGE } from "../../../../../lib/notion/server-constants";
 import DocumentHead from "../../../../../components/document-head";
 import {
   BlogPostLink,
@@ -15,8 +14,6 @@ import {
   PostsNotFound,
   ReadMoreLink,
 } from "../../../../../components/ui/blog/blog-parts";
-import styles from "../../../../../styles/blog.module.css";
-
 import {
   getPosts,
   getRankedPosts,
@@ -24,6 +21,8 @@ import {
   getFirstPostByTag,
   getAllTags,
 } from "../../../../../lib/notion/client";
+import { NUMBER_OF_POSTS_PER_PAGE } from "../../../../../lib/notion/server-constants";
+import styles from "../../../../../styles/blog.module.css";
 
 export async function getStaticProps({ params: { tag, date } }) {
   if (!Date.parse(date) || !/\d{4}-\d{2}-\d{2}/.test(date)) {

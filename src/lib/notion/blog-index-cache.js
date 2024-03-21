@@ -3,8 +3,9 @@
 
 const fs = require("fs");
 
-const { NOTION_API_SECRET, DATABASE_ID, BLOG_INDEX_CACHE } = require("./server-constants");
 const { Client } = require("@notionhq/client");
+
+const { NOTION_API_SECRET, DATABASE_ID, BLOG_INDEX_CACHE } = require("./server-constants");
 
 const notionClient = new Client({
   auth: NOTION_API_SECRET,

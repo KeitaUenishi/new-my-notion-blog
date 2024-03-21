@@ -1,9 +1,10 @@
+import Link from "next/link";
+
 import DocumentHead from "@/components/document-head";
 import { NoContents } from "@/components/ui/blog/blog-parts";
+import { BlogCard } from "@/components/ui/blog/blogCard";
 import { getRankedPosts } from "@/lib/notion/client";
 import styles from "@/styles/page.module.css";
-import { BlogCard } from "@/components/ui/blog/blogCard";
-import Link from "next/link";
 
 export async function getStaticProps() {
   const posts = await getRankedPosts();

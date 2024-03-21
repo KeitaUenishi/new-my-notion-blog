@@ -1,7 +1,7 @@
 import React from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
-import { isYouTubeURL, parseYouTubeVideoId } from "../../lib/blog-helpers";
 
+import { isYouTubeURL, parseYouTubeVideoId } from "../../lib/blog-helpers";
 import styles from "../../styles/notion-block.module.css";
 
 const Video = ({ block }) => {

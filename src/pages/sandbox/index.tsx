@@ -1,10 +1,11 @@
-import React from "react";
+import { Button } from "@mui/material";
 import { InferGetStaticPropsType, NextPage } from "next";
 import Link from "next/link";
-import { Button } from "@mui/material";
+import React from "react";
+
 import DocumentHead from "@/components/document-head";
-import styles from "@/styles/sandbox.module.css";
 import { getFileNames } from "@/server/getFileNames";
+import styles from "@/styles/sandbox.module.css";
 
 export const getStaticProps = async () => {
   const paths = getFileNames("./src/pages/sandbox", ["index"]);

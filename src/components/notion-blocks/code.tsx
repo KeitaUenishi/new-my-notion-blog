@@ -16,7 +16,6 @@ import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-yaml";
 
 import { RichText } from "../../lib/notion/interfaces";
-
 import styles from "../../styles/notion-block.module.css";
 
 const Mermaid = dynamic(() => import("./mermaid"));
