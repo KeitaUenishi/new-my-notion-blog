@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import * as gtag from '@/lib/gtag'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
-import { Hero } from '@/components/hero'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+import { Hero } from '@/components/layout/Hero'
 import { UiProvider } from '@/components/base/UiProvider'
 
 import GoogleAnalytics from '@/components/google-analytics'
