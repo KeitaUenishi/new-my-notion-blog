@@ -10,6 +10,7 @@
   --ft-bg: #1f2937;
   --post-bg: #1f2937;
   --hover-bg: #34455b;
+  --link-text: #2365b2;
   --accents-1: #e5e7eb;
   --accents-2: #3291ff;
   --accents-3: #666;
@@ -23,6 +24,7 @@
   --font-mono: SFMono-Regular, Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace;
 
   --max-width: 1080px;
+  --contents-max-width: 740px;
 }
 
 * {
@@ -67,7 +69,7 @@ figure {
 }
 
 a {
-  color: var(--accents-1);
+  color: var(--link-text);
   text-decoration: none;
 }
 a:hover {

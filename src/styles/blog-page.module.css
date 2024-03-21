@@ -1,8 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 1080px;
-  margin: 0 auto;
+  max-width: var(--contents-max-width);
 }
 @media (max-width: 600px) {
   .container {
@@ -66,7 +65,7 @@
   margin: 0 auto 40px;
 }
 .post :global(h3) {
-  margin: 0;
+  margin: 1rem 0;
   color: var(--fg);
 }
 .post :global(h4) {

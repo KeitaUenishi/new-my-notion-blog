@@ -143,9 +143,7 @@ const TableOfContents = ({ block, blocks }) => {
             className={`${colorClass(block.TableOfContents.Color)} ${styles[indentClass]}`}
             key={headingBlock.Id}
           >
-            <div key={headingBlock.Id}>
-              {heading.RichTexts.map((richText: interfaces.RichText) => richText.PlainText).join("")}
-            </div>
+            {heading.RichTexts.map((richText: interfaces.RichText) => richText.PlainText).join("")}
           </a>
         );
       })}

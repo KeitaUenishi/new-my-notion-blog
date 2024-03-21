@@ -111,7 +111,7 @@ const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPos
     <div className={styles.container}>
       <DocumentHead title={post.Title} description={post.Excerpt} />
 
-      <div className={styles.mainContent}>
+      <article className={styles.mainContent}>
         <div className={styles.post}>
           <PostDate post={post} />
           <PostTags post={post} />
@@ -130,7 +130,7 @@ const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPos
             )}
           </footer>
         </div>
-      </div>
+      </article>
 
       <div className={styles.subContent}>
         <BlogPostLink heading="Posts in the same category" posts={sameTagPosts} />

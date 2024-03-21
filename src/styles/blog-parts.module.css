@@ -12,6 +12,7 @@
   background-color: var(--accents-3);
   margin-left: 0.5rem;
   border-radius: var(--radius);
+  color: var(--accents-1);
 }
 
 .postTagList {
@@ -24,6 +25,11 @@
 .tagListContainer {
   display: flex;
 }
+
+.tagListContainer a {
+  color: var(--accents-1);
+}
+
 .postTagList a {
   padding: 0.1rem 1rem;
   background-color: var(--accents-3);
