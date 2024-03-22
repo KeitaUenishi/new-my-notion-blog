@@ -37,7 +37,6 @@ import { NOTION_API_SECRET, DATABASE_ID } from "./server-constants";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Client } = require("@notionhq/client");
 
-
 const client = new Client({
   auth: NOTION_API_SECRET,
 });

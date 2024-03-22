@@ -1,4 +1,5 @@
 import { render } from "@testing-library/react";
+
 import DocumentHead from "../../src/components/document-head";
 
 jest.mock("next/router", () => ({

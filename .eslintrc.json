@@ -2,7 +2,6 @@
   "extends": ["eslint:recommended", "prettier"],
   "plugins": ["@typescript-eslint", "import", "unused-imports"],
   "parser": "@typescript-eslint/parser",
-  "exclude": ["__mocks__", "public"],
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 13,
