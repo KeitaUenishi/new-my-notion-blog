@@ -1,0 +1,13 @@
+.container {
+  max-width: 300px;
+  margin: 0 auto 32px;
+}
+
+.content {
+  padding: 8px;
+}
+
+.content h3 {
+  margin-bottom: 4px;
+  border-bottom: 1px solid #dfdfdf;
+}

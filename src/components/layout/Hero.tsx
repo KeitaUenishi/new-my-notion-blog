@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "@/styles/hero.module.css";
+import styles from "@/styles/components/layout/hero.module.css";
 
 export const Hero: React.FC = () => {
   return (

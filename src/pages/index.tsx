@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import DocumentHead from "@/components/document-head";
+import { Widget } from "@/components/layout/Widget";
 import { NoContents } from "@/components/ui/blog/blog-parts";
 import { BlogCard } from "@/components/ui/blog/blogCard";
 import { getRankedPosts } from "@/lib/notion/client";
@@ -32,13 +33,18 @@ const RenderPage = ({ posts = [] }) => {
             <p>React,TypeScript, Next.jsをメインに使用しWebアプリを開発しています。大阪在住。</p>
           </div>
         </div>
-        <div className={styles.mainContent}>
-          <NoContents contents={posts} />
+        <section className={styles.contentsContainer}>
+          <div className={styles.mainContent}>
+            <NoContents contents={posts} />
 
-          {posts.map((post) => {
-            return <BlogCard key={post.Slug} post={post} />;
-          })}
-        </div>
+            {posts.map((post) => {
+              return <BlogCard key={post.Slug} post={post} />;
+            })}
+          </div>
+          <aside className={styles.sidebarContent}>
+            <Widget />
+          </aside>
+        </section>
         <footer>
           <div className={styles.postPageLink}>
             <Link href="/posts" passHref>
