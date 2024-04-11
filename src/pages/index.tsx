@@ -42,9 +42,6 @@ const RenderPage = ({ posts = [] }) => {
           </div>
         </footer>
       </section>
-      {/* <aside className={styles.sidebarContent}>
-        <Widget />
-      </aside> */}
     </>
   );
 };
