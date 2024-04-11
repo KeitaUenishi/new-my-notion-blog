@@ -29,12 +29,10 @@ const App = ({ Component, pageProps }) => {
     <UiProvider>
       <GoogleAnalytics />
       <Header />
-      <div className={styles.container}>
+      <main className={styles.container}>
         <Hero />
-        <div className={styles.content}>
-          <Component {...pageProps} />
-        </div>
-      </div>
+        <Component {...pageProps} />
+      </main>
       <Footer />
     </UiProvider>
   );

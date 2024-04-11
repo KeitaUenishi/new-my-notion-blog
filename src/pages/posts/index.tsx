@@ -45,6 +45,7 @@ const RenderPosts = ({ posts = [], firstPost, tags = [] }) => {
           </nav>
         </div>
 
+        {/** TODO: page側と共通化する */}
         {display === displayType.blog && (
           <>
             <div className={blogStyles.mainContent}>

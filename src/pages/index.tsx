@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import DocumentHead from "@/components/document-head";
-import { Widget } from "@/components/layout/Widget";
 import { NoContents } from "@/components/ui/blog/blog-parts";
 import { BlogCard } from "@/components/ui/blog/blogCard";
 import { getRankedPosts } from "@/lib/notion/client";
@@ -20,10 +19,10 @@ export async function getStaticProps() {
 
 const RenderPage = ({ posts = [] }) => {
   return (
-    <div className={styles.container}>
+    <>
       <DocumentHead />
-      <div className={styles.blogContainer}>
-        <div className={styles.profileContainer}>
+      <section className={styles.container}>
+        <section className={styles.profileContainer}>
           <div>
             <img className={styles.profileImage} src="/images/profile.jpg" width={80} height={80} alt="profile" />
           </div>
@@ -32,8 +31,9 @@ const RenderPage = ({ posts = [] }) => {
             <p>職歴なしの状態から28歳でエンジニアとして就職。</p>
             <p>React,TypeScript, Next.jsをメインに使用しWebアプリを開発しています。大阪在住。</p>
           </div>
-        </div>
+        </section>
         <section className={styles.contentsContainer}>
+          {/** TODO: post側と共通化する */}
           <div className={styles.mainContent}>
             <NoContents contents={posts} />
 
@@ -41,9 +41,6 @@ const RenderPage = ({ posts = [] }) => {
               return <BlogCard key={post.Slug} post={post} />;
             })}
           </div>
-          <aside className={styles.sidebarContent}>
-            <Widget />
-          </aside>
         </section>
         <footer>
           <div className={styles.postPageLink}>
@@ -52,8 +49,11 @@ const RenderPage = ({ posts = [] }) => {
             </Link>
           </div>
         </footer>
-      </div>
-    </div>
+      </section>
+      {/* <aside className={styles.sidebarContent}>
+        <Widget />
+      </aside> */}
+    </>
   );
 };
 
