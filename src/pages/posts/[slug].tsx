@@ -3,6 +3,7 @@ import React from "react";
 import useSWR from "swr";
 
 import DocumentHead from "@/components/document-head";
+import { Layout } from "@/components/layout/Layout";
 import {
   BlogPostLink,
   NoContents,
@@ -14,6 +15,7 @@ import {
 } from "@/components/ui/blog/blog-parts";
 import SocialButtons from "@/components/ui/button/social-buttons";
 import { getBlogLink } from "@/lib/blog-helpers";
+import { getArchive } from "@/lib/getArchive";
 import {
   getPosts,
   getAllPosts,
@@ -41,16 +43,19 @@ export async function getStaticProps({ params: { slug } }) {
     };
   }
 
-  const [blocks, rankedPosts, recentPosts, tags, sameTagPosts] = await Promise.all([
+  const [blocks, rankedPosts, recentPosts, tags, sameTagPosts, allPosts] = await Promise.all([
     getAllBlocksByBlockId(post.PageId),
     getRankedPosts(),
     getPosts(5),
     getAllTags(),
     getPostsByTag(post.Tags[0], 6),
+    getAllPosts(),
   ]);
 
   const fallback = {};
   fallback[slug] = blocks;
+
+  const archive = getArchive(allPosts);
 
   return {
     props: {
@@ -61,6 +66,7 @@ export async function getStaticProps({ params: { slug } }) {
       tags,
       sameTagPosts: sameTagPosts.filter((p: Post) => p.Slug !== post.Slug),
       fallback,
+      archive,
     },
     revalidate: 60,
   };
@@ -98,7 +104,7 @@ const includeExpiredImage = (blocks: Array<Block>): boolean => {
   });
 };
 
-const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPosts = [], fallback }) => {
+const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPosts = [], archive = [], fallback }) => {
   const { data: blocks, error } = useSWR(includeExpiredImage(fallback[slug]) && slug, fetchBlocks, {
     fallbackData: fallback[slug],
   });
@@ -108,36 +114,38 @@ const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPos
   }
 
   return (
-    <div className={styles.container}>
-      <DocumentHead title={post.Title} description={post.Excerpt} />
+    <Layout archive={archive}>
+      <div className={styles.container}>
+        <DocumentHead title={post.Title} description={post.Excerpt} />
 
-      <article className={styles.mainContent}>
-        <div className={styles.post}>
-          <PostDate post={post} />
-          <PostTags post={post} />
-          <PostTitle post={post} enableLink={false} />
+        <article className={styles.mainContent}>
+          <div className={styles.post}>
+            <PostDate post={post} />
+            <PostTags post={post} />
+            <PostTitle post={post} enableLink={false} />
 
-          <NoContents contents={blocks} />
-          <PostBody blocks={blocks} />
+            <NoContents contents={blocks} />
+            <PostBody blocks={blocks} />
 
-          <footer>
-            {NEXT_PUBLIC_URL && (
-              <SocialButtons
-                title={post.Title}
-                url={new URL(getBlogLink(post.Slug), NEXT_PUBLIC_URL).toString()}
-                id={post.Slug}
-              />
-            )}
-          </footer>
+            <footer>
+              {NEXT_PUBLIC_URL && (
+                <SocialButtons
+                  title={post.Title}
+                  url={new URL(getBlogLink(post.Slug), NEXT_PUBLIC_URL).toString()}
+                  id={post.Slug}
+                />
+              )}
+            </footer>
+          </div>
+        </article>
+
+        <div className={styles.subContent}>
+          <BlogPostLink heading="Posts in the same category" posts={sameTagPosts} />
+          <BlogPostLink heading="Recommended" posts={rankedPosts} />
+          <BlogPostLink heading="Latest posts" posts={recentPosts} />
         </div>
-      </article>
-
-      <div className={styles.subContent}>
-        <BlogPostLink heading="Posts in the same category" posts={sameTagPosts} />
-        <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        <BlogPostLink heading="Latest posts" posts={recentPosts} />
       </div>
-    </div>
+    </Layout>
   );
 };
 

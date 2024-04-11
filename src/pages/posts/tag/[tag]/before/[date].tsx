@@ -24,6 +24,8 @@ import {
 import { NUMBER_OF_POSTS_PER_PAGE } from "../../../../../lib/notion/server-constants";
 import styles from "../../../../../styles/blog.module.css";
 
+import { Layout } from "@/components/layout/Layout";
+
 export async function getStaticProps({ params: { tag, date } }) {
   if (!Date.parse(date) || !/\d{4}-\d{2}-\d{2}/.test(date)) {
     return { notFound: true };
@@ -91,40 +93,42 @@ const RenderPostsByTagBeforeDate = ({
     return <PostsNotFound />;
   }
 
+  // TODO: レイアウトの修正
   return (
-    <div className={styles.container}>
+    <Layout>
       <DocumentHead description={`Posts in ${tag} before ${date}`} />
+      <div className={styles.container}>
+        <div className={styles.mainContent}>
+          <header>
+            <h2>{tag}</h2>
+          </header>
 
-      <div className={styles.mainContent}>
-        <header>
-          <h2>{tag}</h2>
-        </header>
+          <NoContents contents={posts} />
 
-        <NoContents contents={posts} />
+          {posts.map((post) => {
+            return (
+              <div className={styles.post} key={post.Slug}>
+                <PostDate post={post} />
+                <PostTags post={post} />
+                <PostTitle post={post} />
+                <PostExcerpt post={post} />
+                <ReadMoreLink post={post} />
+              </div>
+            );
+          })}
 
-        {posts.map((post) => {
-          return (
-            <div className={styles.post} key={post.Slug}>
-              <PostDate post={post} />
-              <PostTags post={post} />
-              <PostTitle post={post} />
-              <PostExcerpt post={post} />
-              <ReadMoreLink post={post} />
-            </div>
-          );
-        })}
+          <footer>
+            <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
+          </footer>
+        </div>
 
-        <footer>
-          <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
-        </footer>
+        <div className={styles.subContent}>
+          <BlogPostLink heading="Recommended" posts={rankedPosts} />
+          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
+          <BlogTagLink heading="Categories" tags={tags} />
+        </div>
       </div>
-
-      <div className={styles.subContent}>
-        <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        <BlogPostLink heading="Latest Posts" posts={recentPosts} />
-        <BlogTagLink heading="Categories" tags={tags} />
-      </div>
-    </div>
+    </Layout>
   );
 };
 

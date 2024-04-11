@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FaSearch } from "react-icons/fa";
 
 import styles from "@/styles/components/layout/widget.module.css";
 
-export const Widget: React.FC = () => {
-  useEffect(() => {});
+type Archive = {
+  year: string;
+  count: number;
+  months: { month: string; count: number }[];
+}[];
+
+export const Widget = ({ archive = [] }: { archive: Archive }) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -31,16 +36,27 @@ export const Widget: React.FC = () => {
       </div>
       <div className={styles.content}>
         <h3>タグ</h3>
+        {/* {tags.map((tag) => (
+          <div key={tag}>
+            <a href="#">{tag}</a>
+          </div>
+        ))} */}
       </div>
       <div className={styles.content}>
         <h3>月別アーカイブ</h3>
         <ol>
-          <li>2024年</li>
-          <li>2024年</li>
-          <li>2024年</li>
-          <li>2024年</li>
-          <li>2024年</li>
-          <li>2024年</li>
+          {archive.map((year) => {
+            return (
+              <li key={year.year}>
+                {year.year}
+                <ol>
+                  {year.months.map((month) => (
+                    <li key={month.month}>{month.month}</li>
+                  ))}
+                </ol>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </div>

@@ -2,23 +2,28 @@ import Link from "next/link";
 
 import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
-import { getRankedPosts } from "@/lib/notion/client";
+import { Layout } from "@/components/layout/Layout";
+import { getArchive } from "@/lib/getArchive";
+import { getAllPosts, getRankedPosts } from "@/lib/notion/client";
 import styles from "@/styles/page.module.css";
 
 export async function getStaticProps() {
-  const posts = await getRankedPosts();
+  const [allPosts, posts] = await Promise.all([getAllPosts(), getRankedPosts()]);
+
+  const archive = getArchive(allPosts);
 
   return {
     props: {
       posts,
+      archive,
     },
     revalidate: 60,
   };
 }
 
-const RenderPage = ({ posts = [] }) => {
+const RenderPage = ({ posts = [], archive = [] }) => {
   return (
-    <>
+    <Layout archive={archive}>
       <DocumentHead />
       <section className={styles.container}>
         <section className={styles.profileContainer}>
@@ -42,7 +47,7 @@ const RenderPage = ({ posts = [] }) => {
           </div>
         </footer>
       </section>
-    </>
+    </Layout>
   );
 };
 

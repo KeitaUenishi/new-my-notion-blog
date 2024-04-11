@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 import DocumentHead from "@/components/document-head";
+import { Layout } from "@/components/layout/Layout";
 import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
 import { BlogCard } from "@/components/ui/blog/blogCard";
 import { getBeforeLink } from "@/lib/blog-helpers";
@@ -56,24 +57,27 @@ const RenderPostsBeforeDate = ({ date, posts = [], firstPost, redirect }) => {
     return <PostsNotFound />;
   }
 
+  // TODO: サイドバー用のデータ取得
   return (
-    <div className={styles.container}>
-      <DocumentHead description={`Post before ${date.split("T")[0]}`} />
-      <header>
-        <h2>Posts before {date.split("T")[0]}</h2>
-      </header>
+    <Layout>
+      <div className={styles.container}>
+        <DocumentHead description={`Post before ${date.split("T")[0]}`} />
+        <header>
+          <h2>Posts before {date.split("T")[0]}</h2>
+        </header>
 
-      <div className={styles.mainContent}>
-        <NoContents contents={posts} />
+        <div className={styles.mainContent}>
+          <NoContents contents={posts} />
 
-        {posts.map((post) => {
-          return <BlogCard key={post.Slug} post={post} />;
-        })}
+          {posts.map((post) => {
+            return <BlogCard key={post.Slug} post={post} />;
+          })}
+        </div>
+        <footer>
+          <NextPageLink firstPost={firstPost} posts={posts} />
+        </footer>
       </div>
-      <footer>
-        <NextPageLink firstPost={firstPost} posts={posts} />
-      </footer>
-    </div>
+    </Layout>
   );
 };
 

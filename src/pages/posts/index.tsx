@@ -2,8 +2,10 @@ import { useState } from "react";
 
 import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
+import { Layout } from "@/components/layout/Layout";
 import { BlogTagLink, NextPageLink } from "@/components/ui/blog/blog-parts";
 import { InnerNav } from "@/components/ui/nav/InnerNav";
+import { getArchive } from "@/lib/getArchive";
 import { getPosts, getFirstPost, getRankedPosts, getAllTags, getAllPosts } from "@/lib/notion/client";
 import styles from "@/styles/page.module.css";
 
@@ -16,6 +18,8 @@ export async function getStaticProps() {
     getAllTags(),
   ]);
 
+  const archive = getArchive(allPosts);
+
   return {
     props: {
       posts,
@@ -23,6 +27,7 @@ export async function getStaticProps() {
       firstPost,
       rankedPosts,
       tags,
+      archive,
     },
     revalidate: 60,
   };
@@ -33,16 +38,14 @@ const displayType = {
   tags: "tag",
 };
 
-const RenderPosts = ({ posts = [], allPosts = [], firstPost, tags = [] }) => {
-  console.log("allPosts", allPosts);
-  console.log("tags", tags);
+const RenderPosts = ({ posts = [], firstPost, tags = [], archive }) => {
   const [display, setDisplay] = useState<string>(displayType.blog);
   const navContents = [
     { title: "posts", func: () => setDisplay(displayType.blog) },
     { title: "tags", func: () => setDisplay(displayType.tags) },
   ];
   return (
-    <>
+    <Layout archive={archive}>
       <DocumentHead title="Blog" />
       <div className={styles.container}>
         <InnerNav navItems={navContents} />
@@ -55,7 +58,7 @@ const RenderPosts = ({ posts = [], allPosts = [], firstPost, tags = [] }) => {
           </footer>
         )}
       </div>
-    </>
+    </Layout>
   );
 };
 

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import DocumentHead from "@/components/document-head";
+import { Layout } from "@/components/layout/Layout";
 import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
 import { BlogCard } from "@/components/ui/blog/blogCard";
 import { getTagLink } from "@/lib/blog-helpers";
@@ -57,26 +58,28 @@ const RenderPostsByTags = ({ tag, posts = [], firstPost, redirect }) => {
   if (!posts) {
     return <PostsNotFound />;
   }
-
+  // TODO: レイアウトの修正
   return (
-    <div className={styles.container}>
-      <DocumentHead description={`Posts in ${tag}`} />
-      <header>
-        <h2>{tag}</h2>
-      </header>
+    <Layout>
+      <div className={styles.container}>
+        <DocumentHead description={`Posts in ${tag}`} />
+        <header>
+          <h2>{tag}</h2>
+        </header>
 
-      <div className={styles.mainContent}>
-        <NoContents contents={posts} />
+        <div className={styles.mainContent}>
+          <NoContents contents={posts} />
 
-        {posts.map((post) => {
-          return <BlogCard key={post.Slug} post={post} />;
-        })}
+          {posts.map((post) => {
+            return <BlogCard key={post.Slug} post={post} />;
+          })}
 
-        <footer>
-          <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
-        </footer>
+          <footer>
+            <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
+          </footer>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
