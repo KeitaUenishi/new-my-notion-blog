@@ -4,12 +4,13 @@ import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
 import { BlogTagLink, NextPageLink } from "@/components/ui/blog/blog-parts";
 import { InnerNav } from "@/components/ui/nav/InnerNav";
-import { getPosts, getFirstPost, getRankedPosts, getAllTags } from "@/lib/notion/client";
+import { getPosts, getFirstPost, getRankedPosts, getAllTags, getAllPosts } from "@/lib/notion/client";
 import styles from "@/styles/page.module.css";
 
 export async function getStaticProps() {
-  const [posts, firstPost, rankedPosts, tags] = await Promise.all([
+  const [posts, allPosts, firstPost, rankedPosts, tags] = await Promise.all([
     getPosts(),
+    getAllPosts(),
     getFirstPost(),
     getRankedPosts(),
     getAllTags(),
@@ -18,6 +19,7 @@ export async function getStaticProps() {
   return {
     props: {
       posts,
+      allPosts,
       firstPost,
       rankedPosts,
       tags,
@@ -31,7 +33,9 @@ const displayType = {
   tags: "tag",
 };
 
-const RenderPosts = ({ posts = [], firstPost, tags = [] }) => {
+const RenderPosts = ({ posts = [], allPosts = [], firstPost, tags = [] }) => {
+  console.log("allPosts", allPosts);
+  console.log("tags", tags);
   const [display, setDisplay] = useState<string>(displayType.blog);
   const navContents = [
     { title: "posts", func: () => setDisplay(displayType.blog) },
