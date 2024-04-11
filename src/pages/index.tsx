@@ -1,8 +1,7 @@
 import Link from "next/link";
 
 import DocumentHead from "@/components/document-head";
-import { NoContents } from "@/components/ui/blog/blog-parts";
-import { BlogCard } from "@/components/ui/blog/blogCard";
+import BlogContents from "@/components/layout/BlogContents";
 import { getRankedPosts } from "@/lib/notion/client";
 import styles from "@/styles/page.module.css";
 
@@ -33,14 +32,7 @@ const RenderPage = ({ posts = [] }) => {
           </div>
         </section>
         <section className={styles.contentsContainer}>
-          {/** TODO: post側と共通化する */}
-          <div className={styles.mainContent}>
-            <NoContents contents={posts} />
-
-            {posts.map((post) => {
-              return <BlogCard key={post.Slug} post={post} />;
-            })}
-          </div>
+          <BlogContents posts={posts} />
         </section>
         <footer>
           <div className={styles.postPageLink}>

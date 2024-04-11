@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import DocumentHead from "@/components/document-head";
-import { BlogTagLink, NextPageLink, NoContents } from "@/components/ui/blog/blog-parts";
-import { BlogCard } from "@/components/ui/blog/blogCard";
+import BlogContents from "@/components/layout/BlogContents";
+import { BlogTagLink, NextPageLink } from "@/components/ui/blog/blog-parts";
+import { InnerNav } from "@/components/ui/nav/InnerNav";
 import { getPosts, getFirstPost, getRankedPosts, getAllTags } from "@/lib/notion/client";
-import blogStyles from "@/styles/blog.module.css";
 import styles from "@/styles/page.module.css";
 
 export async function getStaticProps() {
@@ -33,38 +33,25 @@ const displayType = {
 
 const RenderPosts = ({ posts = [], firstPost, tags = [] }) => {
   const [display, setDisplay] = useState<string>(displayType.blog);
+  const navContents = [
+    { title: "posts", func: () => setDisplay(displayType.blog) },
+    { title: "tags", func: () => setDisplay(displayType.tags) },
+  ];
   return (
-    <div className={styles.container}>
-      <div className={blogStyles.container}>
-        <DocumentHead title="Blog" />
+    <>
+      <DocumentHead title="Blog" />
+      <div className={styles.container}>
+        <InnerNav navItems={navContents} />
 
-        <div className={blogStyles.navContainer}>
-          <nav className={blogStyles.navbar}>
-            <a onClick={() => setDisplay(displayType.blog)}>posts</a>
-            <a onClick={() => setDisplay(displayType.tags)}>tags</a>
-          </nav>
-        </div>
-
-        {/** TODO: page側と共通化する */}
-        {display === displayType.blog && (
-          <>
-            <div className={blogStyles.mainContent}>
-              <NoContents contents={posts} />
-              {posts.map((post) => {
-                return <BlogCard key={post.Slug} post={post} />;
-              })}
-            </div>
-            <div className={blogStyles.subContent}></div>
-          </>
-        )}
+        {display === displayType.blog && <BlogContents posts={posts} />}
         {display === displayType.tags && <BlogTagLink heading="Categories" tags={tags} />}
+        {display === displayType.blog && (
+          <footer>
+            <NextPageLink firstPost={firstPost} posts={posts} />
+          </footer>
+        )}
       </div>
-      {display === displayType.blog && (
-        <footer>
-          <NextPageLink firstPost={firstPost} posts={posts} />
-        </footer>
-      )}
-    </div>
+    </>
   );
 };
 
