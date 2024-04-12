@@ -1,30 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-import DocumentHead from "../../../../../components/document-head";
-import {
-  BlogPostLink,
-  BlogTagLink,
-  NextPageLink,
-  NoContents,
-  PostDate,
-  PostExcerpt,
-  PostTags,
-  PostTitle,
-  PostsNotFound,
-  ReadMoreLink,
-} from "../../../../../components/ui/blog/blog-parts";
-import {
-  getPosts,
-  getRankedPosts,
-  getPostsByTagBefore,
-  getFirstPostByTag,
-  getAllTags,
-} from "../../../../../lib/notion/client";
-import { NUMBER_OF_POSTS_PER_PAGE } from "../../../../../lib/notion/server-constants";
-import styles from "../../../../../styles/blog.module.css";
-
+import DocumentHead from "@/components/document-head";
+import BlogContents from "@/components/layout/BlogContents";
 import { Layout } from "@/components/layout/Layout";
+import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
+import { getPostsByTagBefore, getFirstPostByTag } from "@/lib/notion/client";
+import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
+import styles from "@/styles/blog.module.css";
 
 export async function getStaticProps({ params: { tag, date } }) {
   if (!Date.parse(date) || !/\d{4}-\d{2}-\d{2}/.test(date)) {
@@ -43,21 +26,13 @@ export async function getStaticProps({ params: { tag, date } }) {
     };
   }
 
-  const [firstPost, rankedPosts, recentPosts, tags] = await Promise.all([
-    getFirstPostByTag(tag),
-    getRankedPosts(),
-    getPosts(5),
-    getAllTags(),
-  ]);
+  const [firstPost] = await Promise.all([getFirstPostByTag(tag)]);
 
   return {
     props: {
       date,
       posts,
       firstPost,
-      rankedPosts,
-      recentPosts,
-      tags,
       tag,
     },
     revalidate: 3600,
@@ -71,16 +46,7 @@ export async function getStaticPaths() {
   };
 }
 
-const RenderPostsByTagBeforeDate = ({
-  date,
-  posts = [],
-  firstPost,
-  rankedPosts = [],
-  recentPosts = [],
-  tags = [],
-  tag,
-  redirect,
-}) => {
+const RenderPostsByTagBeforeDate = ({ date, posts = [], firstPost, tag, redirect }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -93,40 +59,22 @@ const RenderPostsByTagBeforeDate = ({
     return <PostsNotFound />;
   }
 
-  // TODO: レイアウトの修正
   return (
     <Layout>
       <DocumentHead description={`Posts in ${tag} before ${date}`} />
       <div className={styles.container}>
-        <div className={styles.mainContent}>
-          <header>
-            <h2>{tag}</h2>
-          </header>
+        <header>
+          <h2>{tag}</h2>
+        </header>
 
+        <div className={styles.mainContent}>
           <NoContents contents={posts} />
 
-          {posts.map((post) => {
-            return (
-              <div className={styles.post} key={post.Slug}>
-                <PostDate post={post} />
-                <PostTags post={post} />
-                <PostTitle post={post} />
-                <PostExcerpt post={post} />
-                <ReadMoreLink post={post} />
-              </div>
-            );
-          })}
-
-          <footer>
-            <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
-          </footer>
+          <BlogContents posts={posts} />
         </div>
-
-        <div className={styles.subContent}>
-          <BlogPostLink heading="Recommended" posts={rankedPosts} />
-          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
-          <BlogTagLink heading="Categories" tags={tags} />
-        </div>
+        <footer>
+          <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
+        </footer>
       </div>
     </Layout>
   );
