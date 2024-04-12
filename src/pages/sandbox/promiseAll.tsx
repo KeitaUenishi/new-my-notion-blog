@@ -1,6 +1,8 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 
+import { Layout } from "@/components/layout/Layout";
+
 const PromiseAll = () => {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
@@ -42,7 +44,7 @@ const PromiseAll = () => {
     setData3([oneAwait, twoAwait, threeAwait]);
   };
   return (
-    <div>
+    <Layout>
       <div style={{ marginTop: "32px" }}>
         <Container
           message="await3連発で3つのAPIからデータを取得"
@@ -67,7 +69,7 @@ const PromiseAll = () => {
           onClick={onClickAwaitOneError}
         />
       </div>
-    </div>
+    </Layout>
   );
 };
 
