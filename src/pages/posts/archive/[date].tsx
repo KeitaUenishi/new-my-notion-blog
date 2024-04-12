@@ -1,5 +1,4 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 
 import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
@@ -28,15 +27,7 @@ export async function getServerSideProps({ params: { date } }) {
   };
 }
 
-const RenderPostsBeforeDate = ({ date, posts = [], redirect }) => {
-  const router = useRouter();
-
-  useEffect(() => {
-    if (redirect && !posts) {
-      router.replace(redirect);
-    }
-  }, [router, redirect, posts]);
-
+const RenderPostsBeforeDate = ({ date, posts = [] }) => {
   if (!posts) {
     return <PostsNotFound />;
   }

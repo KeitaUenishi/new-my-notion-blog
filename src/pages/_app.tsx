@@ -1,5 +1,6 @@
 import "@/styles/global.css";
 import { useRouter } from "next/router";
+import NextNProgress from "nextjs-progressbar";
 import { useEffect } from "react";
 
 import { UiProvider } from "@/components/base/UiProvider";
@@ -24,6 +25,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <UiProvider>
       <GoogleAnalytics />
+      <NextNProgress stopDelayMs={200} height={4} showOnShallow={true} />
       <Component {...pageProps} />
     </UiProvider>
   );
