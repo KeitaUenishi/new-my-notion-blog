@@ -3,7 +3,7 @@ import React from "react";
 import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
 import { Layout } from "@/components/layout/Layout";
-import { NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
+import { PostsNotFound } from "@/components/ui/blog/blog-parts";
 import { getPostsDate } from "@/lib/notion/client";
 import styles from "@/styles/blog.module.css";
 
@@ -27,7 +27,7 @@ export async function getServerSideProps({ params: { date } }) {
   };
 }
 
-const RenderPostsBeforeDate = ({ date, posts = [] }) => {
+const RenderPostsArchive = ({ date, posts = [] }) => {
   if (!posts) {
     return <PostsNotFound />;
   }
@@ -41,8 +41,6 @@ const RenderPostsBeforeDate = ({ date, posts = [] }) => {
         </header>
 
         <div className={styles.mainContent}>
-          <NoContents contents={posts} />
-
           <BlogContents posts={posts} />
         </div>
       </div>
@@ -50,4 +48,4 @@ const RenderPostsBeforeDate = ({ date, posts = [] }) => {
   );
 };
 
-export default RenderPostsBeforeDate;
+export default RenderPostsArchive;

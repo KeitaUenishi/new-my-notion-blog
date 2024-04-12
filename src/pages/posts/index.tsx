@@ -1,7 +1,7 @@
 import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
 import { Layout } from "@/components/layout/Layout";
-import { NextPageLink, NoContents } from "@/components/ui/blog/blog-parts";
+import { NextPageLink } from "@/components/ui/blog/blog-parts";
 import { getPosts, getFirstPost, getRankedPosts, getAllPosts } from "@/lib/notion/client";
 import styles from "@/styles/page.module.css";
 
@@ -31,8 +31,6 @@ const RenderPosts = ({ posts = [], firstPost }) => {
       <div className={styles.container}>
         {/** TODO: 共通化する */}
         <div className={styles.mainContent}>
-          <NoContents contents={posts} />
-
           <BlogContents posts={posts} />
         </div>
         <footer>

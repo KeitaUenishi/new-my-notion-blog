@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
 import { Layout } from "@/components/layout/Layout";
-import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
+import { NextPageLink, PostsNotFound } from "@/components/ui/blog/blog-parts";
 import { getPostsByTagBefore, getFirstPostByTag } from "@/lib/notion/client";
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
 import styles from "@/styles/blog.module.css";
@@ -68,8 +68,6 @@ const RenderPostsByTagBeforeDate = ({ date, posts = [], firstPost, tag, redirect
         </header>
 
         <div className={styles.mainContent}>
-          <NoContents contents={posts} />
-
           <BlogContents posts={posts} />
         </div>
         <footer>

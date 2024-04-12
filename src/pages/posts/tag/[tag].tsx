@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
 import { Layout } from "@/components/layout/Layout";
-import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
+import { NextPageLink, PostsNotFound } from "@/components/ui/blog/blog-parts";
 import { getTagLink } from "@/lib/blog-helpers";
 import { getPosts, getPostsByTag, getFirstPostByTag, getAllTags } from "@/lib/notion/client";
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
@@ -68,8 +68,6 @@ const RenderPostsByTags = ({ tag, posts = [], firstPost, redirect }) => {
         </header>
 
         <div className={styles.mainContent}>
-          <NoContents contents={posts} />
-
           <BlogContents posts={posts} />
 
           <footer>
