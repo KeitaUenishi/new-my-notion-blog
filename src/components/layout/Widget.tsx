@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 
@@ -69,15 +70,25 @@ export const Widget = () => {
           {archive.map((arcYear) => {
             const displayYear = `${arcYear.year} (${arcYear.count})`;
             return (
-              <li key={arcYear.year} onClick={() => handleYearClick(arcYear)}>
-                <span className={styles.archiveYear}>{arcYear.isOpenMonth ? "▼" : "▶︎"}</span>
-                {displayYear}
+              <li key={arcYear.year}>
+                <span className={styles.archiveYear} onClick={() => handleYearClick(arcYear)}>
+                  {arcYear.isOpenMonth ? "▼" : "▶︎"}
+                </span>
+                <Link href={`/posts/archive/${arcYear.year}`}>
+                  <a>{displayYear}</a>
+                </Link>
 
                 {arcYear.isOpenMonth && (
                   <ol className={styles.archive}>
                     {arcYear.months.map((arcMonth) => {
                       const displayMonth = `${arcMonth.month} (${arcMonth.count})`;
-                      return <li key={arcMonth.month}>{displayMonth}</li>;
+                      return (
+                        <li key={arcMonth.month}>
+                          <Link href={`/posts/archive/${arcMonth.month}`}>
+                            <a>{displayMonth}</a>
+                          </Link>
+                        </li>
+                      );
                     })}
                   </ol>
                 )}

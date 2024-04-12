@@ -172,6 +172,83 @@ export async function getPostsBefore(date: string, pageSize = 10): Promise<Post[
   return res.results.filter((pageObject) => _validPageObject(pageObject)).map((pageObject) => _buildPost(pageObject));
 }
 
+export async function getPostsDate({
+  year = "",
+  yearMonth = "",
+}: {
+  year?: string;
+  yearMonth?: string;
+}): Promise<Post[]> {
+  if (blogIndexCache.exists()) {
+    const allPosts = await getAllPosts();
+    if (yearMonth) {
+      return allPosts.filter((post) => post.Date === yearMonth);
+    } else if (year) {
+      return allPosts.filter((post) => post.Date.startsWith(year));
+    }
+  }
+
+  let dateParamAfter = {};
+  let dateParamBefore = {};
+  if (yearMonth) {
+    const [_year, _month] = yearMonth.split("-").map(Number);
+    const lastDay = new Date(_year, _month, 0).getDate();
+
+    dateParamAfter = {
+      property: "Date",
+      date: {
+        on_or_after: `${yearMonth}-01`,
+      },
+    };
+    dateParamBefore = {
+      property: "Date",
+      date: {
+        on_or_before: `${_year}-${_month.toString().padStart(2, "0")}-${lastDay.toString().padStart(2, "0")}`,
+      },
+    };
+  } else if (year) {
+    dateParamAfter = {
+      property: "Date",
+      date: {
+        on_or_after: `${year}-01-01`,
+      },
+    };
+    dateParamBefore = {
+      property: "Date",
+      date: {
+        on_or_before: `${year}-12-31`,
+      },
+    };
+  }
+
+  const params = {
+    database_id: DATABASE_ID,
+    filter: {
+      and: [
+        {
+          property: "Published",
+          checkbox: {
+            equals: true,
+          },
+        },
+        dateParamAfter,
+        dateParamBefore,
+      ],
+    },
+    sorts: [
+      {
+        property: "Date",
+        timestamp: "created_time",
+        direction: "descending",
+      },
+    ],
+  };
+
+  const res: responses.QueryDatabaseResponse = await client.databases.query(params);
+
+  return res.results.filter((pageObject) => _validPageObject(pageObject)).map((pageObject) => _buildPost(pageObject));
+}
+
 export async function getFirstPost(): Promise<Post | null> {
   if (blogIndexCache.exists()) {
     const allPosts = await getAllPosts();
