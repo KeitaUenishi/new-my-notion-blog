@@ -28,3 +28,13 @@
   top: 4px;
   right: 28px;
 }
+
+.archive {
+  list-style-type: none;
+  padding-inline-start: 36px;
+  cursor: pointer;
+}
+
+.archiveYear {
+  margin-right: 8px;
+}

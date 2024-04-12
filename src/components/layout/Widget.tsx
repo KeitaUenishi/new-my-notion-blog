@@ -7,16 +7,28 @@ type Archive = {
   year: string;
   count: number;
   months: { month: string; count: number }[];
-}[];
+  isOpenMonth: boolean;
+};
 
 export const Widget = () => {
-  const [archive, setArchive] = React.useState<Archive>([]);
+  const [archive, setArchive] = React.useState<Archive[]>([]);
+
+  const handleYearClick = (accYear: Archive) => {
+    const newArchive = archive.map((arc) => {
+      if (arc.year === accYear.year) {
+        return { ...arc, isOpenMonth: !arc.isOpenMonth };
+      }
+      return arc;
+    });
+    setArchive(newArchive);
+  };
+
   useEffect(() => {
-    console.log("fetching archive data");
     (async () => {
       const res = await fetch("/blog_archive_data.json");
       const data = await res.json();
-      setArchive(data);
+      const initialData = data.map((year) => ({ ...year, isOpenMonth: false }));
+      setArchive(initialData);
     })();
   }, []);
   return (
@@ -53,16 +65,22 @@ export const Widget = () => {
       </div>
       <div className={styles.content}>
         <h3>月別アーカイブ</h3>
-        <ol>
-          {archive.map((year) => {
+        <ol className={styles.archive}>
+          {archive.map((arcYear) => {
+            const displayYear = `${arcYear.year} (${arcYear.count})`;
             return (
-              <li key={year.year}>
-                {year.year}
-                <ol>
-                  {year.months.map((month) => (
-                    <li key={month.month}>{month.month}</li>
-                  ))}
-                </ol>
+              <li key={arcYear.year} onClick={() => handleYearClick(arcYear)}>
+                <span className={styles.archiveYear}>{arcYear.isOpenMonth ? "▼" : "▶︎"}</span>
+                {displayYear}
+
+                {arcYear.isOpenMonth && (
+                  <ol className={styles.archive}>
+                    {arcYear.months.map((arcMonth) => {
+                      const displayMonth = `${arcMonth.month} (${arcMonth.count})`;
+                      return <li key={arcMonth.month}>{displayMonth}</li>;
+                    })}
+                  </ol>
+                )}
               </li>
             );
           })}

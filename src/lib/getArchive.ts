@@ -2,6 +2,7 @@ import * as blogArchiveCache from "@/lib/notion/blog-archive-cache";
 
 export const getArchive = (allPosts = []) => {
   if (blogArchiveCache.exists()) {
+    // TODO: 差分チェックが必要かも
     console.log("Using cached blog archive");
     return blogArchiveCache.get();
   }
@@ -23,14 +24,16 @@ export const getArchive = (allPosts = []) => {
     return acc;
   }, {});
 
-  const archive = Object.keys(archiveData).map((year) => ({
-    year,
-    count: archiveData[year],
-    months: Object.keys(archiveData[year].months).map((month) => ({
-      month,
-      count: archiveData[year].months[month],
-    })),
-  }));
+  const archive = Object.keys(archiveData)
+    .reverse()
+    .map((year) => ({
+      year,
+      count: archiveData[year].count,
+      months: Object.keys(archiveData[year].months).map((month) => ({
+        month,
+        count: archiveData[year].months[month],
+      })),
+    }));
 
   blogArchiveCache.set(archive);
   return archive;
