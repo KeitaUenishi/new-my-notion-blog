@@ -21,9 +21,9 @@ export async function getStaticProps() {
   };
 }
 
-const RenderPage = ({ posts = [], archive = [] }) => {
+const RenderPage = ({ posts = [] }) => {
   return (
-    <Layout archive={archive}>
+    <Layout>
       <DocumentHead />
       <section className={styles.container}>
         <section className={styles.profileContainer}>

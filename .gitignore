@@ -26,12 +26,11 @@ yarn-error.log*
 
 .blog_index_data
 .blog_index_data_previews
-.blog_archive_data
-.blog_archive_data_previews
 
 .now
 .vercel
 
 tmp/
 public/notion_images/*
+public/blog_archive_data.json
 !public/notion_images/.gitkeep

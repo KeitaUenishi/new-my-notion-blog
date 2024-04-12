@@ -5,7 +5,7 @@ import { Widget } from "./Widget";
 
 import styles from "@/styles/shared.module.css";
 
-export const Layout = ({ children, archive }) => {
+export const Layout = ({ children }) => {
   return (
     <>
       <Header />
@@ -15,7 +15,7 @@ export const Layout = ({ children, archive }) => {
           {children}
         </main>
         <aside className={styles.sidebarContent}>
-          <Widget archive={archive} />
+          <Widget />
         </aside>
       </div>
       <Footer />

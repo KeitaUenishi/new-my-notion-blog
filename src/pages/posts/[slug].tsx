@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/blog/blog-parts";
 import SocialButtons from "@/components/ui/button/social-buttons";
 import { getBlogLink } from "@/lib/blog-helpers";
-import { getArchive } from "@/lib/getArchive";
 import {
   getPosts,
   getAllPosts,
@@ -43,19 +42,16 @@ export async function getStaticProps({ params: { slug } }) {
     };
   }
 
-  const [blocks, rankedPosts, recentPosts, tags, sameTagPosts, allPosts] = await Promise.all([
+  const [blocks, rankedPosts, recentPosts, tags, sameTagPosts] = await Promise.all([
     getAllBlocksByBlockId(post.PageId),
     getRankedPosts(),
     getPosts(5),
     getAllTags(),
     getPostsByTag(post.Tags[0], 6),
-    getAllPosts(),
   ]);
 
   const fallback = {};
   fallback[slug] = blocks;
-
-  const archive = getArchive(allPosts);
 
   return {
     props: {
@@ -66,7 +62,6 @@ export async function getStaticProps({ params: { slug } }) {
       tags,
       sameTagPosts: sameTagPosts.filter((p: Post) => p.Slug !== post.Slug),
       fallback,
-      archive,
     },
     revalidate: 60,
   };
@@ -104,7 +99,7 @@ const includeExpiredImage = (blocks: Array<Block>): boolean => {
   });
 };
 
-const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPosts = [], archive = [], fallback }) => {
+const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPosts = [], fallback }) => {
   const { data: blocks, error } = useSWR(includeExpiredImage(fallback[slug]) && slug, fetchBlocks, {
     fallbackData: fallback[slug],
   });
@@ -114,7 +109,7 @@ const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPos
   }
 
   return (
-    <Layout archive={archive}>
+    <Layout>
       <div className={styles.container}>
         <DocumentHead title={post.Title} description={post.Excerpt} />
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 
 import styles from "@/styles/components/layout/widget.module.css";
@@ -9,7 +9,16 @@ type Archive = {
   months: { month: string; count: number }[];
 }[];
 
-export const Widget = ({ archive = [] }: { archive: Archive }) => {
+export const Widget = () => {
+  const [archive, setArchive] = React.useState<Archive>([]);
+  useEffect(() => {
+    console.log("fetching archive data");
+    (async () => {
+      const res = await fetch("/blog_archive_data.json");
+      const data = await res.json();
+      setArchive(data);
+    })();
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.content}>
