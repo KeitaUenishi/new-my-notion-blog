@@ -4,18 +4,19 @@ import DocumentHead from "@/components/document-head";
 import BlogContents from "@/components/layout/BlogContents";
 import { Layout } from "@/components/layout/Layout";
 import { getArchive } from "@/lib/getArchive";
-import { getAllPosts, getRankedPosts } from "@/lib/notion/client";
+import { getAllPosts, getAllTags, getRankedPosts } from "@/lib/notion/client";
+import { writeTags } from "@/lib/tags";
 import styles from "@/styles/page.module.css";
 
 export async function getStaticProps() {
-  const [allPosts, posts] = await Promise.all([getAllPosts(), getRankedPosts()]);
+  const [allPosts, posts, tags] = await Promise.all([getAllPosts(), getRankedPosts(), getAllTags()]);
 
-  const archive = getArchive(allPosts);
+  getArchive(allPosts);
+  writeTags(tags);
 
   return {
     props: {
       posts,
-      archive,
     },
     revalidate: 60,
   };

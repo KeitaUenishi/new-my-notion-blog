@@ -1,11 +1,6 @@
 import * as blogArchiveCache from "@/lib/notion/blog-archive-cache";
 
 export const getArchive = (allPosts = []) => {
-  if (blogArchiveCache.exists()) {
-    // TODO: 差分チェックが必要かも
-    console.log("Using cached blog archive");
-    return blogArchiveCache.get();
-  }
   const archiveData = allPosts.reduce((acc, post) => {
     const year = post.Date.substring(0, 4);
     const yearMonth = post.Date.substring(0, 7);

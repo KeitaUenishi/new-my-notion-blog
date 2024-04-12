@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 
+import { TagLinkList } from "@/components/ui/tag/TagList";
 import styles from "@/styles/components/layout/widget.module.css";
 
 type Archive = {
@@ -13,6 +14,7 @@ type Archive = {
 
 export const Widget = () => {
   const [archive, setArchive] = React.useState<Archive[]>([]);
+  const [tags, setTags] = React.useState<string[]>([]);
 
   const handleYearClick = (accYear: Archive) => {
     const newArchive = archive.map((arc) => {
@@ -26,12 +28,17 @@ export const Widget = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/blog_archive_data.json");
-      const data = await res.json();
-      const initialData = data.map((year) => ({ ...year, isOpenMonth: false }));
-      setArchive(initialData);
+      const [archive, tags] = await Promise.all([fetch("/blog_archive_data.json"), fetch("/tags_data.json")]).then(
+        async (res) => {
+          return Promise.all(res.map(async (r) => await r.json()));
+        },
+      );
+      const initArchiveData = archive.map((year) => ({ ...year, isOpenMonth: false }));
+      setArchive(initArchiveData);
+      setTags(tags);
     })();
   }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -58,11 +65,7 @@ export const Widget = () => {
       </div>
       <div className={styles.content}>
         <h3>タグ</h3>
-        {/* {tags.map((tag) => (
-          <div key={tag}>
-            <a href="#">{tag}</a>
-          </div>
-        ))} */}
+        <TagLinkList tags={tags} />
       </div>
       <div className={styles.content}>
         <h3>月別アーカイブ</h3>

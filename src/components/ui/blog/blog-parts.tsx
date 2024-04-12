@@ -92,14 +92,6 @@ export const BlogPostLink = ({ heading, posts }) => (
   </div>
 );
 
-export const BlogTagLink = ({ heading, tags }) => (
-  <div className={styles.blogTagLink}>
-    <h3>{heading}</h3>
-    <NoContents contents={tags} />
-    <TagLinkList tags={tags} />
-  </div>
-);
-
 export const PostLinkList = ({ posts }) => {
   if (!posts || posts.length === 0) return null;
 
@@ -115,24 +107,6 @@ export const PostLinkList = ({ posts }) => {
         );
       })}
     </ul>
-  );
-};
-
-export const TagLinkList = ({ tags }) => {
-  if (!tags || tags.length === 0) return null;
-
-  return (
-    <div className={styles.postTagList}>
-      {tags.map((tag: string) => {
-        return (
-          <div className={styles.tagListContainer} key={tag}>
-            <Link href="/posts/tag/[tag]" as={getTagLink(tag)} passHref>
-              {tag}
-            </Link>
-          </div>
-        );
-      })}
-    </div>
   );
 };
 

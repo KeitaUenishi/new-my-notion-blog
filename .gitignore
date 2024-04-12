@@ -33,4 +33,5 @@ yarn-error.log*
 tmp/
 public/notion_images/*
 public/blog_archive_data.json
+public/tags_data.json
 !public/notion_images/.gitkeep

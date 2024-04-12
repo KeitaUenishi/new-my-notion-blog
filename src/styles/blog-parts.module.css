@@ -15,29 +15,6 @@
   color: var(--accents-1);
 }
 
-.postTagList {
-  margin: 32px auto;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: start;
-}
-.tagListContainer {
-  display: flex;
-}
-
-.tagListContainer a {
-  color: var(--accents-1);
-}
-
-.postTagList a {
-  padding: 0.1rem 1rem;
-  background-color: var(--accents-3);
-  margin: 0.5rem;
-  border-radius: var(--radius);
-  font-size: 1.2rem;
-}
-
 .postTitle {
   margin: 2rem 0;
   font-size: 2.4rem;
