@@ -249,6 +249,36 @@ export async function getPostsDate({
   return res.results.filter((pageObject) => _validPageObject(pageObject)).map((pageObject) => _buildPost(pageObject));
 }
 
+export async function getPostsBySearch(query: string): Promise<Post[]> {
+  if (blogIndexCache.exists()) {
+    const allPosts = await getAllPosts();
+    return allPosts.filter((post) => post.Title.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  const params = {
+    database_id: DATABASE_ID,
+    filter: _buildFilter([
+      {
+        property: "Page",
+        title: {
+          contains: query,
+        },
+      },
+    ]),
+    sorts: [
+      {
+        property: "Date",
+        timestamp: "created_time",
+        direction: "descending",
+      },
+    ],
+  };
+
+  const res: responses.QueryDatabaseResponse = await client.databases.query(params);
+
+  return res.results.filter((pageObject) => _validPageObject(pageObject)).map((pageObject) => _buildPost(pageObject));
+}
+
 export async function getFirstPost(): Promise<Post | null> {
   if (blogIndexCache.exists()) {
     const allPosts = await getAllPosts();

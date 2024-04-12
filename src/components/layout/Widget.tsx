@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
 
 import { TagLinkList } from "@/components/ui/tag/TagList";
 import styles from "@/styles/components/layout/widget.module.css";
@@ -13,6 +13,8 @@ type Archive = {
 };
 
 export const Widget = () => {
+  const router = useRouter();
+  const [searchForm, setSearchForm] = React.useState<string>("");
   const [archive, setArchive] = React.useState<Archive[]>([]);
   const [tags, setTags] = React.useState<string[]>([]);
 
@@ -24,6 +26,11 @@ export const Widget = () => {
       return arc;
     });
     setArchive(newArchive);
+  };
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push({ pathname: "/posts/search", query: { q: searchForm } });
   };
 
   useEffect(() => {
@@ -56,12 +63,15 @@ export const Widget = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {/** TODO: レスポンシブ時のアイコン */}
         <h3>検索</h3>
-        <input type="text" placeholder="記事を検索" />
-        <span className={styles.searchIcon}>
-          <FaSearch size={18} color="black" />
-        </span>
+        <form onSubmit={handleSearch} className={styles.searchForm}>
+          <input
+            type="text"
+            placeholder="キーワードを入力"
+            aria-label="キーワードを入力"
+            onChange={(e) => setSearchForm(e.target.value)}
+          />
+        </form>
       </div>
       <div className={styles.content}>
         <h3>タグ</h3>

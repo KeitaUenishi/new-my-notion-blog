@@ -18,17 +18,6 @@
   margin: 8px 0;
 }
 
-.content > input {
-  border-radius: var(--radius);
-  padding: 8px 32px 8px 8px;
-}
-
-.searchIcon {
-  position: relative;
-  top: 4px;
-  right: 28px;
-}
-
 .archive {
   list-style-type: none;
   padding-inline-start: 24px;
@@ -37,4 +26,35 @@
 
 .archiveYear {
   margin-right: 8px;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #dfe1e5;
+  border-radius: var(--radius);
+}
+
+.searchForm:hover {
+  box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+}
+
+.searchForm::before {
+  width: 45px;
+  height: 15px;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%20%3Cpath%20d%3D%22M23.7%2020.8%2019%2016.1c-.2-.2-.5-.3-.8-.3h-.8c1.3-1.7%202-3.7%202-6C19.5%204.4%2015.1%200%209.7%200S0%204.4%200%209.7s4.4%209.7%209.7%209.7c2.3%200%204.3-.8%206-2v.8c0%20.3.1.6.3.8l4.7%204.7c.4.4%201.2.4%201.6%200l1.3-1.3c.5-.5.5-1.2.1-1.6zm-14-5.1c-3.3%200-6-2.7-6-6s2.7-6%206-6%206%202.7%206%206-2.6%206-6%206z%22%20fill%3D%22%239aa0a6%22%3E%3C%2Fpath%3E%20%3C%2Fsvg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  content: "";
+}
+
+.searchForm input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+  padding: 8px 32px 8px 8px;
+  font-size: 16px;
 }
