@@ -71,14 +71,10 @@
 }
 .post :global(h4) {
   margin: 1.8rem 0 0.8rem;
+  padding-bottom: 0.5rem;
   color: var(--fg);
   font-size: 2rem;
-}
-.post :global(h4):after {
-  color: var(--accents-1);
-  font-size: 0.9rem;
-  content: "▼";
-  padding-left: 0.2rem;
+  border-bottom: 1px solid var(--accents-1);
 }
 .post :global(h5) {
   margin: 1.8rem 0 0.8rem;
