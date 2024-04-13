@@ -12,7 +12,7 @@
   gap: 32px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .profileContainer {
     flex-direction: column;
   }
@@ -72,7 +72,7 @@
 .postPageLink a:hover {
   background: var(--hover-bg);
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .postPageLink a {
     width: 50%;
   }

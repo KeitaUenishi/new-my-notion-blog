@@ -8,9 +8,23 @@
 
 .mainContainer {
   max-width: 760px;
+  width: 760px;
   min-height: 70vh;
+  padding: 16px;
 }
 
 .sidebarContent {
   padding: 16px;
+}
+
+@media (max-width: 965px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 760px) {
+  .mainContainer {
+    width: initial;
+  }
 }

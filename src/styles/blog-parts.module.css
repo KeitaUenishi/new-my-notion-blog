@@ -16,13 +16,14 @@
 }
 
 .postTitle {
-  margin: 2rem 0;
-  font-size: 2.4rem;
+  margin: 24px 0;
+  font-size: 16px;
   color: var(--fg);
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .postTitle {
-    font-size: 1.8rem;
+    margin: 12px 0;
+    font-size: 12px;
   }
 }
 .postTitle a {
@@ -30,7 +31,7 @@
   font-weight: 700;
   color: inherit;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .postTitle a {
     font-size: 1.15rem;
   }
@@ -58,7 +59,7 @@
   text-align: center;
   line-height: 3rem;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .readMoreLink a {
     width: 50%;
   }
@@ -82,7 +83,7 @@
 .nextPageLink a:hover {
   background: var(--hover-bg);
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .nextPageLink a {
     width: 50%;
   }
@@ -154,7 +155,7 @@
 .postsNotFound {
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .tag {
     font-size: 0.75rem;
     padding-right: 0.75rem;

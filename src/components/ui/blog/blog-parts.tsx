@@ -81,7 +81,7 @@ export const NextPageLink = ({ firstPost, posts, tag = "" }) => {
 export const NoContents = ({ contents }) => {
   if (!!contents && contents.length > 0) return null;
 
-  return <div className={styles.noContents}>There are no contents yet</div>;
+  return <div className={styles.noContents}>条件に一致するコンテンツがありませんでした</div>;
 };
 
 export const BlogPostLink = ({ heading, posts }) => (
