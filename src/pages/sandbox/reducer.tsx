@@ -1,6 +1,6 @@
-import { Box } from "@mui/material";
 import React from "react";
 
+import { Layout } from "@/components/layout/Layout";
 import AddTask from "@/components/sandBox/reducer/AddTask";
 import TaskList from "@/components/sandBox/reducer/TaskList";
 
@@ -37,11 +37,11 @@ const Reducer = () => {
   }
 
   return (
-    <Box>
+    <Layout>
       <h1>Task</h1>
       <AddTask onAddTask={handleAddTask} />
       <TaskList tasks={tasks} onChangeTask={handleChangeTask} onDeleteTask={handleDeleteTask} />
-    </Box>
+    </Layout>
   );
 };
 

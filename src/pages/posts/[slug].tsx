@@ -3,6 +3,7 @@ import React from "react";
 import useSWR from "swr";
 
 import DocumentHead from "@/components/document-head";
+import { Layout } from "@/components/layout/Layout";
 import {
   BlogPostLink,
   NoContents,
@@ -108,36 +109,38 @@ const RenderPost = ({ slug, post, rankedPosts = [], recentPosts = [], sameTagPos
   }
 
   return (
-    <div className={styles.container}>
-      <DocumentHead title={post.Title} description={post.Excerpt} />
+    <Layout>
+      <div className={styles.container}>
+        <DocumentHead title={post.Title} description={post.Excerpt} />
 
-      <article className={styles.mainContent}>
-        <div className={styles.post}>
-          <PostDate post={post} />
-          <PostTags post={post} />
-          <PostTitle post={post} enableLink={false} />
+        <article className={styles.mainContent}>
+          <div className={styles.post}>
+            <PostDate post={post} />
+            <PostTags post={post} />
+            <PostTitle post={post} enableLink={false} />
 
-          <NoContents contents={blocks} />
-          <PostBody blocks={blocks} />
+            <NoContents contents={blocks} />
+            <PostBody blocks={blocks} />
 
-          <footer>
-            {NEXT_PUBLIC_URL && (
-              <SocialButtons
-                title={post.Title}
-                url={new URL(getBlogLink(post.Slug), NEXT_PUBLIC_URL).toString()}
-                id={post.Slug}
-              />
-            )}
-          </footer>
+            <footer>
+              {NEXT_PUBLIC_URL && (
+                <SocialButtons
+                  title={post.Title}
+                  url={new URL(getBlogLink(post.Slug), NEXT_PUBLIC_URL).toString()}
+                  id={post.Slug}
+                />
+              )}
+            </footer>
+          </div>
+        </article>
+
+        <div className={styles.subContent}>
+          <BlogPostLink heading="Posts in the same category" posts={sameTagPosts} />
+          <BlogPostLink heading="Recommended" posts={rankedPosts} />
+          <BlogPostLink heading="Latest posts" posts={recentPosts} />
         </div>
-      </article>
-
-      <div className={styles.subContent}>
-        <BlogPostLink heading="Posts in the same category" posts={sameTagPosts} />
-        <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        <BlogPostLink heading="Latest posts" posts={recentPosts} />
       </div>
-    </div>
+    </Layout>
   );
 };
 

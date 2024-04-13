@@ -1,13 +1,18 @@
 import Link from "next/link";
 
 import DocumentHead from "@/components/document-head";
-import { NoContents } from "@/components/ui/blog/blog-parts";
-import { BlogCard } from "@/components/ui/blog/blogCard";
-import { getRankedPosts } from "@/lib/notion/client";
+import BlogContents from "@/components/layout/BlogContents";
+import { Layout } from "@/components/layout/Layout";
+import { getArchive } from "@/lib/getArchive";
+import { getAllPosts, getAllTags, getRankedPosts } from "@/lib/notion/client";
+import { writeTags } from "@/lib/tags";
 import styles from "@/styles/page.module.css";
 
 export async function getStaticProps() {
-  const posts = await getRankedPosts();
+  const [allPosts, posts, tags] = await Promise.all([getAllPosts(), getRankedPosts(), getAllTags()]);
+
+  getArchive(allPosts);
+  writeTags(tags);
 
   return {
     props: {
@@ -19,10 +24,10 @@ export async function getStaticProps() {
 
 const RenderPage = ({ posts = [] }) => {
   return (
-    <div className={styles.container}>
+    <Layout>
       <DocumentHead />
-      <div className={styles.blogContainer}>
-        <div className={styles.profileContainer}>
+      <section className={styles.container}>
+        <section className={styles.profileContainer}>
           <div>
             <img className={styles.profileImage} src="/images/profile.jpg" width={80} height={80} alt="profile" />
           </div>
@@ -31,14 +36,10 @@ const RenderPage = ({ posts = [] }) => {
             <p>職歴なしの状態から28歳でエンジニアとして就職。</p>
             <p>React,TypeScript, Next.jsをメインに使用しWebアプリを開発しています。大阪在住。</p>
           </div>
-        </div>
-        <div className={styles.mainContent}>
-          <NoContents contents={posts} />
-
-          {posts.map((post) => {
-            return <BlogCard key={post.Slug} post={post} />;
-          })}
-        </div>
+        </section>
+        <section className={styles.contentsContainer}>
+          <BlogContents posts={posts} />
+        </section>
         <footer>
           <div className={styles.postPageLink}>
             <Link href="/posts" passHref>
@@ -46,8 +47,8 @@ const RenderPage = ({ posts = [] }) => {
             </Link>
           </div>
         </footer>
-      </div>
-    </div>
+      </section>
+    </Layout>
   );
 };
 
