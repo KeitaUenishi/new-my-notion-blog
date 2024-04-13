@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import Prism from "prismjs";
 import React, { useState } from "react";
 
+import { Layout } from "@/components/layout/Layout";
 import { useUi } from "@/hooks/useUi";
 import styles from "@/styles/notion-block.module.css";
 
@@ -17,7 +18,7 @@ const ReactContext = () => {
   };
 
   return (
-    <div>
+    <Layout>
       <p>React Contextで共通のローディング処理を作成</p>
       <Button variant="contained" onClick={onClick}>
         フェッチする
@@ -83,7 +84,7 @@ const ReactContext = () => {
         </div>
         <p>uiProviderを_app.tsxに置いて、完成！</p>
       </div>
-    </div>
+    </Layout>
   );
 };
 

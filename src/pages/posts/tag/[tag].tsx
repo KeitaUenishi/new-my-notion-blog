@@ -2,8 +2,9 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import DocumentHead from "@/components/document-head";
-import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
-import { BlogCard } from "@/components/ui/blog/blogCard";
+import BlogContents from "@/components/layout/BlogContents";
+import { Layout } from "@/components/layout/Layout";
+import { NextPageLink, PostsNotFound } from "@/components/ui/blog/blog-parts";
 import { getTagLink } from "@/lib/blog-helpers";
 import { getPosts, getPostsByTag, getFirstPostByTag, getAllTags } from "@/lib/notion/client";
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
@@ -57,26 +58,24 @@ const RenderPostsByTags = ({ tag, posts = [], firstPost, redirect }) => {
   if (!posts) {
     return <PostsNotFound />;
   }
-
+  // TODO: レイアウトの修正
   return (
-    <div className={styles.container}>
-      <DocumentHead description={`Posts in ${tag}`} />
-      <header>
-        <h2>{tag}</h2>
-      </header>
+    <Layout>
+      <div className={styles.container}>
+        <DocumentHead description={`Posts in ${tag}`} />
+        <header>
+          <h2>{tag}</h2>
+        </header>
 
-      <div className={styles.mainContent}>
-        <NoContents contents={posts} />
+        <div className={styles.mainContent}>
+          <BlogContents posts={posts} />
 
-        {posts.map((post) => {
-          return <BlogCard key={post.Slug} post={post} />;
-        })}
-
-        <footer>
-          <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
-        </footer>
+          <footer>
+            <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
+          </footer>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

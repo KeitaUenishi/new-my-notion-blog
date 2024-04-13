@@ -2,10 +2,11 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 import DocumentHead from "@/components/document-head";
-import { NextPageLink, NoContents, PostsNotFound } from "@/components/ui/blog/blog-parts";
-import { BlogCard } from "@/components/ui/blog/blogCard";
+import BlogContents from "@/components/layout/BlogContents";
+import { Layout } from "@/components/layout/Layout";
+import { NextPageLink, PostsNotFound } from "@/components/ui/blog/blog-parts";
 import { getBeforeLink } from "@/lib/blog-helpers";
-import { getPosts, getRankedPosts, getPostsBefore, getFirstPost, getAllTags } from "@/lib/notion/client";
+import { getPosts, getPostsBefore, getFirstPost } from "@/lib/notion/client";
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/lib/notion/server-constants";
 import styles from "@/styles/blog.module.css";
 
@@ -14,20 +15,13 @@ export async function getStaticProps({ params: { date } }) {
     return { notFound: true };
   }
 
-  const [posts, firstPost, rankedPosts, tags] = await Promise.all([
-    getPostsBefore(date, NUMBER_OF_POSTS_PER_PAGE),
-    getFirstPost(),
-    getRankedPosts(),
-    getAllTags(),
-  ]);
+  const [posts, firstPost] = await Promise.all([getPostsBefore(date, NUMBER_OF_POSTS_PER_PAGE), getFirstPost()]);
 
   return {
     props: {
       date,
       posts,
       firstPost,
-      rankedPosts,
-      tags,
     },
     revalidate: 3600,
   };
@@ -57,23 +51,21 @@ const RenderPostsBeforeDate = ({ date, posts = [], firstPost, redirect }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <Layout>
       <DocumentHead description={`Post before ${date.split("T")[0]}`} />
-      <header>
-        <h2>Posts before {date.split("T")[0]}</h2>
-      </header>
+      <div className={styles.container}>
+        <header>
+          <h2>Posts before {date.split("T")[0]}</h2>
+        </header>
 
-      <div className={styles.mainContent}>
-        <NoContents contents={posts} />
-
-        {posts.map((post) => {
-          return <BlogCard key={post.Slug} post={post} />;
-        })}
+        <div className={styles.mainContent}>
+          <BlogContents posts={posts} />
+        </div>
+        <footer>
+          <NextPageLink firstPost={firstPost} posts={posts} />
+        </footer>
       </div>
-      <footer>
-        <NextPageLink firstPost={firstPost} posts={posts} />
-      </footer>
-    </div>
+    </Layout>
   );
 };
 

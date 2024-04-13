@@ -4,7 +4,7 @@
   max-width: 1080px;
   margin: 0 auto;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .container {
     display: block;
   }
@@ -34,7 +34,7 @@
   width: 100%;
   gap: 32px;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .mainContent {
     width: 100%;
   }
@@ -43,7 +43,7 @@
 .subContent {
   width: 100%;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .subContent {
     width: 100%;
   }

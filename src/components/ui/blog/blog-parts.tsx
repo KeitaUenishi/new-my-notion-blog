@@ -81,7 +81,7 @@ export const NextPageLink = ({ firstPost, posts, tag = "" }) => {
 export const NoContents = ({ contents }) => {
   if (!!contents && contents.length > 0) return null;
 
-  return <div className={styles.noContents}>There are no contents yet</div>;
+  return <div className={styles.noContents}>条件に一致するコンテンツがありませんでした</div>;
 };
 
 export const BlogPostLink = ({ heading, posts }) => (
@@ -89,14 +89,6 @@ export const BlogPostLink = ({ heading, posts }) => (
     <h3>{heading}</h3>
     <NoContents contents={posts} />
     <PostLinkList posts={posts} />
-  </div>
-);
-
-export const BlogTagLink = ({ heading, tags }) => (
-  <div className={styles.blogTagLink}>
-    <h3>{heading}</h3>
-    <NoContents contents={tags} />
-    <TagLinkList tags={tags} />
   </div>
 );
 
@@ -115,24 +107,6 @@ export const PostLinkList = ({ posts }) => {
         );
       })}
     </ul>
-  );
-};
-
-export const TagLinkList = ({ tags }) => {
-  if (!tags || tags.length === 0) return null;
-
-  return (
-    <div className={styles.postTagList}>
-      {tags.map((tag: string) => {
-        return (
-          <div className={styles.tagListContainer} key={tag}>
-            <Link href="/posts/tag/[tag]" as={getTagLink(tag)} passHref>
-              {tag}
-            </Link>
-          </div>
-        );
-      })}
-    </div>
   );
 };
 

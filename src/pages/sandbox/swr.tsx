@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 
 import { fetcher } from "@/common/fetcher";
+import { Layout } from "@/components/layout/Layout";
 
 const Swr: NextPage = () => {
   const [db, setDb] = useState("asdfg");
@@ -17,8 +18,9 @@ const Swr: NextPage = () => {
 
   const key = data?.key;
 
+  // TODO: muiを撤去
   return (
-    <Box>
+    <Layout>
       <Box mb={8}>
         <p>現在のstateのデータ: {db}</p>
       </Box>
@@ -43,7 +45,7 @@ const Swr: NextPage = () => {
         <br />
         （API側で、レスポンスまで3秒かかるように設定しています）
       </p>
-    </Box>
+    </Layout>
   );
 };
 

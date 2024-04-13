@@ -1,6 +1,7 @@
 import Prism from "prismjs";
 import { useRef } from "react";
 
+import { Layout } from "@/components/layout/Layout";
 import styles from "@/styles/notion-block.module.css";
 
 export default function CatFriends() {
@@ -33,7 +34,7 @@ export default function CatFriends() {
   }
 
   return (
-    <>
+    <Layout>
       <nav>
         <div>
           <button onClick={() => scrollToId(4)}>id: 4</button>
@@ -73,7 +74,7 @@ export default function CatFriends() {
           />
         </pre>
       </div>
-    </>
+    </Layout>
   );
 }
 

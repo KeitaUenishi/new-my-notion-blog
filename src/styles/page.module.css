@@ -4,25 +4,15 @@
   margin: 0 auto;
 }
 
-.blogContainer {
-  display: flex;
-  flex-direction: column;
-}
-@media (max-width: 600px) {
-  .container {
-    display: block;
-  }
-}
-
 .profileContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   gap: 32px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .profileContainer {
     flex-direction: column;
   }
@@ -36,22 +26,14 @@
   margin-top: 32px;
 }
 
-.mainContent {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-}
-@media (max-width: 600px) {
-  .mainContent {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+.contentsContainer {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 32px;
 }
 
 .container > div {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 .container div:last-child {
   margin-bottom: 0;
@@ -90,7 +72,7 @@
 .postPageLink a:hover {
   background: var(--hover-bg);
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .postPageLink a {
     width: 50%;
   }
