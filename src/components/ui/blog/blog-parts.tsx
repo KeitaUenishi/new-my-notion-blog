@@ -16,7 +16,7 @@ export const PostTitle = ({ post, enableLink = true }) => {
     <h3 className={styles.postTitle}>
       {enableLink ? (
         <Link href="/posts/[slug]" as={getBlogLink(post.Slug)} passHref>
-          <a>{postTitle}</a>
+          {postTitle}
         </Link>
       ) : (
         postTitle
@@ -31,7 +31,7 @@ export const PostTags = ({ post }) => (
       post.Tags.length > 0 &&
       post.Tags.map((tag: string) => (
         <Link href="/posts/tag/[tag]" as={getTagLink(tag)} key={tag} passHref>
-          <a>{tag}</a>
+          {tag}
         </Link>
       ))}
   </div>
@@ -51,8 +51,12 @@ export const PostBody = ({ blocks }) => (
 
 export const ReadMoreLink = ({ post }) => (
   <div className={styles.readMoreLink}>
-    <Link href="/posts/[slug]" as={getBlogLink(post.Slug)} passHref>
-      <a className={styles.readMore}>Read more</a>
+    <Link
+      href="/posts/[slug]"
+      as={getBlogLink(post.Slug)}
+      passHref
+      className={styles.readMore}>
+      Read more
     </Link>
   </div>
 );
@@ -72,7 +76,7 @@ export const NextPageLink = ({ firstPost, posts, tag = "" }) => {
         as={tag ? getTagBeforeLink(tag, lastPost.Date) : getBeforeLink(lastPost.Date)}
         passHref
       >
-        <a>次へ ＞</a>
+        次へ ＞
       </Link>
     </div>
   );
@@ -101,7 +105,7 @@ export const PostLinkList = ({ posts }) => {
         return (
           <li key={post.Slug}>
             <Link href="/posts/[slug]" as={getBlogLink(post.Slug)} passHref>
-              <a>{post.Title}</a>
+              {post.Title}
             </Link>
           </li>
         );

@@ -23,7 +23,7 @@ export const NavMenu = () => {
             return (
               <li key={label}>
                 <Link href={path} passHref>
-                  <a>{label}</a>
+                  {label}
                 </Link>
               </li>
             );

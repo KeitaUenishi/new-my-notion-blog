@@ -11,7 +11,7 @@ export const TagLinkList = ({ tags }) => {
       {tags.map((tag: string) => {
         return (
           <li className={styles.tagListContainer} key={tag}>
-            <Link href="/posts/tag/[tag]" as={getTagLink(tag)} passHref>
+            <Link href="/posts/tag/[tag]" as={getTagLink(tag)} passHref legacyBehavior>
               {tag}
             </Link>
           </li>

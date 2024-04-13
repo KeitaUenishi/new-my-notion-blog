@@ -8,7 +8,7 @@ import { getBlogLink } from "@/lib/blog-helpers";
 
 export const BlogCard = ({ post }) => {
   return (
-    <Link href={getBlogLink(post.Slug)} key={post.Slug}>
+    <Link href={getBlogLink(post.Slug)} key={post.Slug} legacyBehavior>
       <article className={styles.postContainer}>
         <div className={styles.post} key={post.Slug}>
           <PostDate post={post} />

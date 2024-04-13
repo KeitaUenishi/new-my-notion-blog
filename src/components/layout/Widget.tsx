@@ -88,7 +88,7 @@ export const Widget = () => {
                   {arcYear.isOpenMonth ? "▼" : "▶︎"}
                 </span>
                 <Link href={`/posts/archive/${arcYear.year}`}>
-                  <a>{displayYear}</a>
+                  {displayYear}
                 </Link>
 
                 {arcYear.isOpenMonth && (
@@ -98,7 +98,7 @@ export const Widget = () => {
                       return (
                         <li key={arcMonth.month}>
                           <Link href={`/posts/archive/${arcMonth.month}`}>
-                            <a>{displayMonth}</a>
+                            {displayMonth}
                           </Link>
                         </li>
                       );

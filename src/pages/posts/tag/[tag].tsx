@@ -58,7 +58,6 @@ const RenderPostsByTags = ({ tag, posts = [], firstPost, redirect }) => {
   if (!posts) {
     return <PostsNotFound />;
   }
-  // TODO: レイアウトの修正
   return (
     <Layout>
       <div className={styles.container}>

@@ -23,7 +23,6 @@ export const getStaticProps = async () => {
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const SandBox: NextPage<Props> = ({ paths }) => {
-  // TODO: レスポンシブレイアウトの調整
   return (
     <Layout>
       <DocumentHead title="SandBox" />
@@ -33,7 +32,7 @@ const SandBox: NextPage<Props> = ({ paths }) => {
         <article className={styles.contents}>
           {paths.pages.map((path, idx) => {
             return (
-              <Link key={`${path}-${idx}`} href={`/sandbox/${path}`}>
+              <Link key={`${path}-${idx}`} href={`/sandbox/${path}`} legacyBehavior>
                 <div className={styles.sandboxContainer}>{pageTitles[path]}</div>
               </Link>
             );
